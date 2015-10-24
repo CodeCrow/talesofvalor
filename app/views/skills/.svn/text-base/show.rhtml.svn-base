@@ -1,0 +1,41 @@
+<div id="skillshow">
+<h1><%= @skill.name %></h1>
+
+<%= render :partial => "tags/tagspot", :locals => {:id => @skill.id, :type => "SkillTag"} %>
+
+<%= @skill.bgs? ? "<p><i>Between Game Skill</i></p>" : "" %>
+<%= @skill.flag? ? "<p><i>Flag</i></p>" : "" %>
+<p><%= (@skheaders.collect {|skh| skh.dabble ? skh : nil}).compact.empty? ? "Cannot" : "Can" %> be dabbled</p>
+
+<% if session[:admin] %>
+<p><b>Tag:</b> <%= @skill.tag %>
+<% end %>
+
+<p><b>Description:</b>
+<%= simple_format(@skill.description) %>
+</p>
+<% if session[:staff] %>
+<b>Header</b>
+<ul>
+<% for sk in @skheaders %>
+<li>
+<% if sk.header %>
+Under <%= link_to sk.header.name, :controller => 'headers', :action => 'show', :id => sk.header %>
+<% else %>
+Open Skill
+<% end %>
+   for <%= sk.cost %> CPs
+<% if session[:admin] %>
+<i>(<%= link_to 'Delete', :controller => 'skills', :action => 'deleteheader', :id => @skill, :header_id => sk.header_id %>)</i>
+<% end %>
+</li>
+<% end %>
+</ul>
+<% end %>
+<% if session[:admin] %>
+<%= link_to 'Edit', :action => 'edit', :id => @skill %> |
+<%= link_to 'Destroy', { :action => 'destroy', :id => @skill }, :confirm => 'Are you sure?', :method => :post %> |
+<% end %>
+<%= link_to 'Print', :action => 'print', :id => @skill %> | 
+<%= link_to 'List', :action => 'list' %>
+</div>

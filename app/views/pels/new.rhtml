@@ -1,0 +1,8 @@
+<h1>Enter New PEL</h1>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form', :locals => { :player => @player, :event => @event, :attended => @attend } %>
+  <%= submit_tag "Create" %>
+<% end %>
+
+<%= link_to 'Back', :action => :show, :controller => :players, :id => @player.id %>

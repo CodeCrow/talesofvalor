@@ -1,0 +1,22 @@
+<%= render :partial => 'progressbar', :locals => {:char => @char } %>
+
+<h1>Editing Character: <%= @char.name %></h1>
+
+<%= render :partial => 'actions', :locals => {:char => @char } %>
+<% if session[:staff] %>
+| <%= link_to 'List', :action => 'list' %>
+<% end %>
+
+<% form_tag :action => 'update', :id => @char do %>
+  <%= render :partial => 'form' %>
+<% if session[:admin] or @char.player == session[:user] %>
+  <%= submit_tag 'Save and Continue' %>
+<% end %>
+  <%= submit_tag 'Save and Exit' %>
+<% end %>
+
+<p>
+<%= render :partial => 'actions', :locals => {:char => @char } %>
+<% if session[:staff] %>
+| <%= link_to 'List', :action => 'list' %>
+<% end %>

@@ -1,0 +1,16 @@
+<%= render :partial => 'subnavigation' %> 
+
+
+<h1>Contact Information</h1>
+
+<p>Use the following email addresses to contact us and send us information.</p>
+
+<h2>General Contact Info</h2>
+<ul>
+	<ul>
+		<li>General Game Issues <%= mail_to "staff@talesofvalor.com" %></li>
+		<li>Website Issues <%= mail_to "webmaster@talesofvalor.com" %></li>
+		<li>PELS <%= mail_to "pels@talesofvalor.com" %></li>
+		<li>Character Updates <%= mail_to "characterupdate@talesofvalor.com" %></li>
+	</ul>
+</ul>

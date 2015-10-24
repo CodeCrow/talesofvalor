@@ -1,0 +1,16 @@
+<h1>Editing <%= @skill.name %> for <% @event.name %></h1>
+
+<ul>
+<li><b>Character</b>: <%= link_to @char.name, :controller => :chars, :action => :show, :id => @char.id %></li>
+<li><b>Event</b>: <%= link_to @event.name, :controller => :events, :action => :show, :id => @event.id %></li>
+<li><b>Skill</b>: <%= link_to @skill.name, :controller => :skills, :action => :show, :id => @skill.id %><br>
+<b>Description</b>: <%=h @skill.description %><br>
+<b>Used</b>: <%= @bgscounts[@skill.id].join(" / ") %></li>
+</ul>
+
+<% form_tag :action => 'update', :id => @bgs do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Back', :action => 'list', :event_id => @event.id, :char_id => @char.id %>

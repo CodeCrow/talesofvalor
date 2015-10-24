@@ -1,0 +1,84 @@
+<div id="chartop">
+<div id="chardesc">
+<h1><%=h @char.send('name') + (@char.npc? ? " (NPC)" : "") %></h1>
+
+<%= render :partial => "tags/tagspot", :locals => {:id => @char.id, :type => "CharTag"} %>
+<p>
+<%= render :partial => 'actions', :locals => {:char => @char} %>
+| <%= link_to 'Print with skills', :controller => :chars, :action => 'print', :detail => :true, :id => @char %> 
+<% if session[:staff] %>
+| <%= link_to 'List', :action => 'list' %></p>
+<% end %>
+
+<% if @char.player %>
+<p><b>Player:</b> <%= link_to @char.player.name, :controller => :players, :action => :show, :id => @char.player %></p>
+<% end %>
+
+<%= render :partial => "cpstats", :locals => {:char => @char } %>
+
+<h2>Origins</h2>
+<% for o in @origins %>
+<%= o.type.to_s.capitalize %>: <%= link_to o.name, :controller => 'origins', :action => 'show', :id => o %><br/>
+<% end %>
+</div>
+
+	<div id="chphoto">
+	<%= image_tag((@char.picture_url and @char.picture_url.size() > 0 ? ("pictures/"+@char.picture_url) : "no_picture.gif"), :align => :right, :size => "200x300") %>
+	</div>
+</div>
+
+<div class="charul">
+<h1>Skills</h1>
+<ul><li><h2>Open Skills</h2></li>
+<ul>
+<% for skh in @sbyh[0] %>
+<% if @cskills[skh.skill_id] && @cskillsleft.delete(skh.skill_id) %>
+<li><%= skh.skill.flag? ? "" : @cskills[skh.skill_id].count %> <%= link_to skh.skill.name, :controller => 'skills', :action => 'show', :id => skh.skill %></li>
+<% end %>
+<% end %>
+</ul>
+
+<% if !@cheaders.empty? %>
+<li><h2>Headers</h2></li>
+<ul><% for h in @cheaders %>
+<li class="skillheader"><%= link_to h.name, :controller => 'headers', :action => 'show', :id => h %></li>
+<ul>
+<% if @sbyh[h.id] %>
+<% for skh in @sbyh[h.id] %>
+<% if @cskills[skh.skill_id] && @cskillsleft.delete(skh.skill_id) %>
+<li><%= skh.skill.flag? ? "" : @cskills[skh.skill_id].count %> <%= link_to skh.skill.name, :controller => 'skills', :action => 'show', :id => skh.skill %></li>
+<% end %>
+<% end %>
+<% end %>
+</ul>
+<% end %>
+</ul>
+<% end %>
+
+<% if !@cskillsleft.empty? %>
+<li><font size="+1"><b>Other Skills</b></font></li><ul>
+<% for sk in @cskillsleft.collect {|s| Skill.find(s) } %>
+<li><%= sk.flag? ? "" : @cskills[sk.id].count %> <%= link_to sk.name, :controller => 'skills', :action => 'show', :id => sk.id %></li>
+<% end %>
+</ul>
+<% end %>
+</ul>
+</div>
+<div id="charmain">
+<p><b>Description:</b></p><%= simple_format(@char.description) %>
+<p><b>History:</b></p><%= simple_format(@char.history) %>
+<p><b>Player Notes:</b></p><%= simple_format(@char.player_notes) %>
+<p><b>Visible Staff Notes:</b></p><%= simple_format(@char.visible_staff_notes) %>
+
+<% if session[:staff] %>
+<p><b>Private Staff Notes:</b></p><%= simple_format(@char.private_staff_notes) %>
+<% end %>
+
+<p><b>Log:</b><br>
+<%= render :partial => "log", :locals => {:logs => @logs, :char => @char, :start => true } %>
+
+<p><%= render :partial => 'actions', :locals => {:char => @char} %>
+<% if session[:staff] %>
+| <%= link_to 'List', :action => 'list' %>
+<% end %>
+</div>

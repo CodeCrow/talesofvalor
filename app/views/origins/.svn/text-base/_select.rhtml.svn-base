@@ -1,0 +1,11 @@
+<table width="100%"><tr>
+<td>
+<b>Select <%= type %></b>
+
+<%= selector(type) %>
+<%= observe_field('origin_'+type, { :url => url_for( :controller => 'origins', :action => 'select' ), :update => 'window_origin_'+type, :with => "value" } ) %>
+</td>
+<td>
+<div id="window_origin_<%= type %>">
+</div>
+</td></tr></table>

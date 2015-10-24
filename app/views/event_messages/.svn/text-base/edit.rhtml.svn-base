@@ -1,0 +1,14 @@
+<h1>Edit Message</h1>
+
+<ul>
+<li><b>Character</b>: <%= link_to @event_message.char.name, :controller => :chars, :action => :show, :id => @event_message.char.id %></li>
+<li><b>Event</b>: <%= link_to @event_message.event.name, :controller => :events, :action => :show, :id => @event_message.event.id %></li>
+<li><b>Author</b>: <%= link_to @event_message.author.name, :controller => :players, :action => :show, :id => @event_message.author.id %> on <%= @event_message.submit_date.strftime("%d %b %Y") %></li>
+</ul>
+
+<% form_tag :action => 'update', :id => @event_message do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Edit" %>
+<% end %>
+
+<%= link_to 'Back to event', :controller => :events, :action => :show, :id => @event_message.event.id %>

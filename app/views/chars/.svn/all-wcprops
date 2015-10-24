@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/fodder_svn/!svn/ver/717/site/trunk/app/views/chars
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/530/site/trunk/app/views/chars/list.rhtml
+END
+_actions.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/fodder_svn/!svn/ver/650/site/trunk/app/views/chars/_actions.rhtml
+END
+_cpstats.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/fodder_svn/!svn/ver/140/site/trunk/app/views/chars/_cpstats.rhtml
+END
+_log.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/140/site/trunk/app/views/chars/_log.rhtml
+END
+_toggle.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/views/chars/_toggle.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/645/site/trunk/app/views/chars/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/535/site/trunk/app/views/chars/_form.rhtml
+END
+addrace.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/535/site/trunk/app/views/chars/addrace.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/651/site/trunk/app/views/chars/edit.rhtml
+END
+pick.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/635/site/trunk/app/views/chars/pick.rhtml
+END
+brief.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/140/site/trunk/app/views/chars/brief.rhtml
+END
+_progressbar.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/fodder_svn/!svn/ver/535/site/trunk/app/views/chars/_progressbar.rhtml
+END
+addbackground.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/fodder_svn/!svn/ver/717/site/trunk/app/views/chars/addbackground.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/fodder_svn/!svn/ver/535/site/trunk/app/views/chars/new.rhtml
+END

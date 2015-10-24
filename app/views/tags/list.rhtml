@@ -1,0 +1,14 @@
+<div id="taglist">
+<h1>Tag List</h1>
+<p>Tags are items that can be used to represent societies, groups, places or major themes within the game.  Once a Tag is created you may link staff members, players, BGS, skills or Plots to that Tag.  Once you create a Tag it is important that you update the items that it relates to as they change over time.  Otherwise the information that the Tag relates to will become outdated.</p><hr>
+<%= link_to 'Create', :action => :new %>
+<div class="tagul">
+<ul>
+<% for tagdesc in @tags %>
+<li><%= link_to tagdesc.tag, :action => :show, :tag => tagdesc.tag %>
+(<%= @counts[tagdesc.tag] ? @counts[tagdesc.tag] : "0" %> items) - 
+<%= link_to 'Destroy', { :action => 'destroy', :tag => tagdesc.tag }, :confirm => 'Are you sure?', :method => :post %></li>
+<% end %>
+</ul>
+</div>
+</div>

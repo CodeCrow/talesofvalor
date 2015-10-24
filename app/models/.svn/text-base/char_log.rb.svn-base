@@ -1,0 +1,3 @@
+class CharLog < ActiveRecord::Base
+  belongs_to :char
+end

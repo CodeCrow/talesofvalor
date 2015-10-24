@@ -1,0 +1,22 @@
+<h1>Listing rules</h1>
+
+<table>
+<tr><th align=left>Name</th><th align=left>Type</th><th align=left>Prereq</th><th align=left>Skill</th><th align=left>New Cost</th></tr>
+<% for rule in @rules %>
+  <tr>
+<td><%= rule.name %></td><td><%= rule.type.to_s %></td><td><%= rule.prereq.name %></td><td><%= rule.skill.name %></td><td><%= rule.new_cost %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => rule %></td>
+<% if session[:admin] %>
+    <td><%= link_to 'Edit', :action => 'edit', :id => rule %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => rule }, :confirm => 'Are you sure?', :method => :post %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @rule_pages.current.previous } if @rule_pages.current.previous %>
+<%= link_to 'Next page', { :page => @rule_pages.current.next } if @rule_pages.current.next %> 
+
+<br />
+
+<%= session[:admin] ? link_to('New rule', :action => 'new') : "" %>

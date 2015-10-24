@@ -1,0 +1,9 @@
+<h1>Editing grant</h1>
+
+<% form_tag :action => 'update', :id => @grant do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @grant %> |
+<%= link_to 'Back', :action => 'list' %>

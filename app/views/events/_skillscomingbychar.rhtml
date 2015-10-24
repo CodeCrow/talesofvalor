@@ -1,0 +1,6 @@
+<ul>
+<% for char in chars %>
+<li><%= link_to char.name, :controller => :chars, :action => :show, :id => char.id %> has <%= char.count %></li>
+<% end %>
+<%= link_to_function("Collapse", "$(&quot;eventwindow#{counter}&quot;).update(&quot;&quot;);") %>
+</ul>

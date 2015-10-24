@@ -1,0 +1,35 @@
+<%= error_messages_for 'skill' %>
+
+<!--[form:skill]-->
+<p><label for="skill_name">Name</label><br/>
+<%= text_field 'skill', 'name'  %></p>
+
+<p><label for="skill_name">Tag</label><br/>
+<%= text_field 'skill', 'tag'  %></p>
+
+<p><label for="skill_description">Description</label><br/>
+<%= text_area 'skill', 'description'  %></p>
+
+<p><label for="skill_flag">Flag?</label><br/>
+<select id="skill_flag" name="skill[flag]"><option value="false" <%= @skill.flag? ? "" : "selected" %>>False</option><option value="true" <%= @skill.flag? ? "selected" : "" %>>True</option></select></p>
+
+<p><label for="skill_bgs">Bgs?</label><br/>
+<select id="skill_bgs" name="skill[bgs]"><option value="false" <%= @skill.bgs? ? "" : "selected" %>>False</option><option value="true" <%= @skill.bgs? ? "selected" : "" %>>True</option></select></p>
+
+<p><b>Costs</b>
+<ul>
+<% for skh in @skheaders %>
+<% if skh.header %>
+<li><%= link_to skh.header.name, :controller => 'headers', :action => 'show', :id => skh.header %> for 
+<input type="text" name="skh[<%= skh.header.id %>]" value="<%= skh.cost %>" size="4"> CPs
+<% else %>
+<li>Open Skill for
+<input type="text" name="skh[0]" value="<%= skh.cost %>" size="4"> CPs
+<% end %>
+<% end %>
+<li><select name="skh[new][id]"><option value="-1">Add a new header<option value="0">Open Skill<% for h in @headers - @skheaders.collect {|x| x.header} %><option value="<%= h.id %>"><%= h.name %><% end %></select>
+for <input type="text" name="skh[new][cost]" size="4"> CPs
+&nbsp;&nbsp;&nbsp;(<input type="checkbox" name="skh[new][dabble]" value="1"> Dabblable?)</li>
+</ul>
+<!--[eoform:skill]-->
+

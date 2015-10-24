@@ -1,0 +1,5 @@
+<div id="header_<%= h.id %>">
+<b><%= link_to h.name, :controller => 'headers', :action => 'show', :id => h %></b>
+ (<%= link_to_remote("Purchase", :update => ('header_' + h.id.to_s), :url => { :action => :open_header, :id => char, :header => h.id},
+	:success => visual_effect(:highlight, "header_"+h.id.to_s, :duration => 2) + remote_function(:update => "cpstats", :url => { :action => :cpstats, :id => char }, :complete => visual_effect(:highlight, "cpstats", :duration => 2)+' addhandlers(document.skills)')) %>
+ for <%= hcosts[h.id] %> CPs)</div>

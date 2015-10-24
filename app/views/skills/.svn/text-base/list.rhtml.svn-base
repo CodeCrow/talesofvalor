@@ -1,0 +1,52 @@
+<% filtername = { 'all' => 'All Skills', 'standard' => 'Regular Skills', 'hidden' => 'Hidden Skills', 'unlinked' => 'Unlinked Skills'}[params[:filter]] %>
+<h1>Skill List: <%= filtername %></h1>
+
+<div id="actionbox">
+Action: <%= session[:admin] ? link_to('New skill', :action => 'new')+"<br>" : ""%>
+<%= link_to 'Previous page', { :page => @skill_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @skill_pages.current.previous %>
+<%= link_to 'Next page', { :page => @skill_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @skill_pages.current.next %> 
+</div>
+
+<% if session[:staff] %>
+<div id="filterbox">
+Filter:
+<%= link_to 'All', :filter => 'all' %> |
+<%= link_to 'Regular', :filter => 'standard' %> |
+<%= link_to 'BGS', :filter => 'bgs' %> |
+<%= link_to 'Hidden', :filter => 'hidden' %> |
+<%= link_to 'Unlinked', :filter => 'unlinked' %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "name" %>
+Name: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "desc" %>
+Description: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+</div>
+<% end %>
+
+<div id="gameinfo">
+<table class="gitable">
+  <tr><th>Name</th><th>Description</th></tr>
+  
+<% @skills.each do |skill| %>
+  <tr>
+  <td valign=top><%= link_to skill.name, :action => 'show', :id => skill %></td>
+  <td><%=h skill.description %></td>
+<% if session[:admin] %>
+    <td valign=top><%= link_to 'Edit', :action => 'edit', :id => skill %></td>
+    <td valign=top><%= link_to 'Destroy', { :action => 'destroy', :id => skill }, :confirm => 'Are you sure?', :method => :post %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+</div>
+<div id="bottompagemover">
+<%= link_to 'Previous page', { :page => @skill_pages.current.previous, :filter => params[:filter] } if @skill_pages.current.previous %>
+<%= link_to 'Next page', { :page => @skill_pages.current.next, :filter => params[:filter] } if @skill_pages.current.next %> 
+</div>
+<br />
+

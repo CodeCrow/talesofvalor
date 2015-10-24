@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/fodder_svn/!svn/ver/534/site/trunk/app/views/players
+END
+adminconsole.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/adminconsole.rhtml
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/530/site/trunk/app/views/players/list.rhtml
+END
+welcome.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/welcome.rhtml
+END
+harvest.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/harvest.rhtml
+END
+bulkgrantcps.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/bulkgrantcps.rhtml
+END
+_log.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/_log.rhtml
+END
+_toggle.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/_toggle.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/534/site/trunk/app/views/players/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/_form.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/edit.rhtml
+END
+login.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/login.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/140/site/trunk/app/views/players/new.rhtml
+END

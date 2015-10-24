@@ -1,0 +1,46 @@
+<%= error_messages_for 'pel' %>
+
+Player: <%= player.name %><br>
+<% if attended and attended.char %>
+Character: <%= attended.char.name %><br>
+<% end %>
+Event: <%= link_to event.name, :action => :show, :controller => :events, :id => event.id %>
+<%= "(Marked Attended)" if attended %>
+ -- PEL due by <%= event.pel_by.strftime("%d %b %Y") %><br>
+<b><% if Time.new > event.pel_by %>
+After deadline; no CP will be awarded
+<% else 
+t = (event.pel_by - Time.new).to_i
+sec = t % 60
+t /= 60
+min = t % 60
+t /= 60
+hour = t % 24
+t /= 24
+%>
+Submit in the next 
+<%= "#{t} day(s) #{hour} hour(s) #{min} minute(s) and #{sec} second(s)" %>
+<% end %>
+</b><br><br>
+
+<!--[form:pel]-->
+<%= hidden_field 'pel', 'event_id' %>
+<%= hidden_field 'pel', 'player_id' %>
+<%= hidden_field 'pel', 'worstmoments' %>
+<table>
+<tr><td valign=top width=75px><label for="pel_dislikes"><b>Suggestions:</b></label></td>
+<td><i>Is there anything that you feel could be improved about the game? Was there anything that you thought was well done and should be continued?</i><br><%= text_area 'pel', 'dislikes', :cols => 60, :rows => 4  %></p></td></tr>
+<tr><td valign=top width=75px><label for="pel_likes"><b>Event Favorites:</b></label></td>
+<td><i>Please put down your favorite moments or interactions and why you enjoyed them so we can use them as a guide for future plots.</i><br><%= text_area 'pel', 'likes', :cols => 60, :rows => 4  %></p></td></tr>
+<tr><td valign=top width=75px><label for="pel_learned"><b>Skills or Spells Learned:</b></label></td>
+<td><i>If you are working on a hidden or advanced header or have gained access to a specific hidden or advanced ability please put the name or description along with the teachers name here. Please remember that you can only learn 1 open ability and 1 header ability a game.</i><br><%= text_area 'pel', 'learned', :cols => 60, :rows => 4  %></p></td></tr>
+<tr><td valign=top width=75px><label for="pel_data"><b>About the Event:</b></label></td>
+<td><i>Please tell us about the event, what you did, who you interacted with, and if or how you furthered any of your character goals. Remember the more detailed you are the easier it is for us to tailor our stories!</i><br><%= text_area 'pel', 'data', :cols => 60, :rows => 20  %></p></td></tr>
+<tr><td valign=top width=75px><label for="pel_bestmoments"><b>Code of Conduct:</b></label></td>
+<td><i>If your character follows a faith, or if you need to record specific roleplay for another path, please put that information down here. For those following a path of faith, please put down any interactions or roleplay specific to your character following the tenets of your faith. Faith abilities and spells are based on the player's roleplay and as such may be lost if the character does not act accordingly (along with any character points invested).</i><br><%= text_area 'pel', 'bestmoments', :cols => 60, :rows => 4  %></p></td></tr>
+<tr><td valign=top width=75px><label for="pel_rating"><b>Rating:</b></label></td>
+<td><%= select 'pel', 'rating', [["5 - Amazing", 5], ["4 - Good", 4], ["3 - Average",3], ["2 - Fair", 2], ["1 - Poor",1]] %>
+</td></tr>
+</table>
+<!--[eoform:pel]-->
+

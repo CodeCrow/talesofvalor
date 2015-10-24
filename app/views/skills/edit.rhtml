@@ -1,0 +1,9 @@
+<h1>Editing skill</h1>
+
+<% form_tag :action => 'update', :id => @skill do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @skill %> |
+<%= link_to 'List', :action => 'list' %>

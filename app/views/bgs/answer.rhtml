@@ -1,0 +1,18 @@
+<h1>Answering Between Game Skill</h1>
+
+<ul>
+<li><b>Event</b>: <%= link_to @bgs.event.name, :controller => :events, :action => :show, :id => @bgs.event.id %></li>
+<li><b>Skill</b>: <%= link_to @bgs.skill.name, :controller => :skills, :action => :show, :id => @bgs.skill.id %><br>
+<b>Description</b>: <%=h @bgs.skill.description %></li>
+<li><b>Count</b>: <%= @bgs.count %></li>
+<li><b>Question</b>: <%=h @bgs.question %></li>
+</ul>
+
+<% form_tag :action => 'submitanswer', :id => @bgs do %>
+<p><label for="bgs_question">Answer</label><br/>
+<%= text_area 'bgs', 'answer', :rows => 8, :cols => 50  %></p>
+  <%= submit_tag 'Answer' %>
+<% end %>
+
+<%= link_to 'Back', :action => 'eventlist', :event_id => @bgs.event.id %>
+

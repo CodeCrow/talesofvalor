@@ -1,0 +1,24 @@
+<% if char.player != nil and char.player.active_char_id == char.id %>
+(active) 
+<% end %>
+<% if char.player == nil %>
+(no player)
+<% end %>
+<B><%= char.cp_spent %>/<%= char.cp_spent + char.cp_avail %> CPs</B> 
+<%= link_to 'Briefing', :controller => :chars, :action => 'brief', :id => char %>  
+<%= link_to 'Print', :controller => :chars, :action => 'print', :id => char %> 
+<% if session[:admin] or char.player == session[:user] %>
+<%= link_to 'Update', :controller => :chars, :action => char.nextcreatestep(), :id => char %> 
+<%= link_to 'Reset', { :controller => :chars, :action => 'reset', :id => char }, :confirm => "Are you sure you want to reset #{char.name}?", :method => :post %>
+<% elsif session[:staff] %>
+<%= link_to 'Edit', { :controller => :chars, :action => 'edit', :id => char } %>
+<% end %>
+<% if char.player != nil and char.player.active_char_id != char.id and session[:staff] and (session[:admin] or char.player.id == session[:user].id) %>
+ <%= link_to 'Set Active', :controller => :players, :action => :setactive, :id => char.player, :charid => char %>
+<% end %>
+<% if session[:admin] %>
+<% if char.player != session[:user] %>
+ <%= link_to 'Steal', :controller => :chars, :action => :steal, :id => char, :newowner => session[:user] %>
+<% end %>
+ <%= link_to 'Destroy', { :controller => :chars, :action => 'destroy', :id => char }, :confirm => "Are you sure you want to destroy #{char.name}?", :method => :post %>
+<% end %>

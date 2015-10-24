@@ -1,0 +1,2 @@
+<% if session[:staff] 
+   tags = {} unless defined? tags %><div id="tag<%= id %>" class="tagspot"><%= render :partial => "tags/tagbutton", :locals => {:id => id, :type => type, :tags => tags} %></div><% end %>

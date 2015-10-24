@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/fodder_svn/!svn/ver/140/site/trunk/app/views/event_messages
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/fodder_svn/!svn/ver/140/site/trunk/app/views/event_messages/list.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/fodder_svn/!svn/ver/140/site/trunk/app/views/event_messages/_form.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/fodder_svn/!svn/ver/140/site/trunk/app/views/event_messages/edit.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/fodder_svn/!svn/ver/140/site/trunk/app/views/event_messages/new.rhtml
+END

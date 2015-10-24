@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/fodder_svn/!svn/ver/716/site/trunk/app/views/bgs
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/fodder_svn/!svn/ver/668/site/trunk/app/views/bgs/list.rhtml
+END
+_assignee.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/_assignee.rhtml
+END
+eventlist.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/716/site/trunk/app/views/bgs/eventlist.rhtml
+END
+_expand.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/_expand.rhtml
+END
+answer.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/answer.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/_form.rhtml
+END
+_comments.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/_comments.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/edit.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/fodder_svn/!svn/ver/140/site/trunk/app/views/bgs/new.rhtml
+END

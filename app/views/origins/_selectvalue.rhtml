@@ -1,0 +1,25 @@
+<b><%= origin.name %></b>
+
+<%= simple_format(origin.description) %>
+
+Granted Skills
+<ul>
+<% for os in oskills %>
+<li><%= os.skill.flag? ? "" : os.count %> <%= link_to os.skill.name, :controller => 'skills', :action => 'show', :id => os.skill_id %>
+<% end %>
+</ul>
+
+<% if origin.name == 'Freilan Grand Caravan' %>
+Trade Affinity (pick one)<p>
+
+<% sk = Skill.find(:first, :conditions => {:name => 'Network'}) %>
+<%= radio_button_tag "freilan", sk.id, false %> <%= link_to sk.name, :controller => 'skills', :action => 'show', :id => sk.id %><br/>
+<% sk = Skill.find(:first, :conditions => {:name => 'Transit'}) %>
+<%= radio_button_tag "freilan", sk.id, false %> <%= link_to sk.name, :controller => 'skills', :action => 'show', :id => sk.id %><br/>
+
+<% elsif origin.name == 'Barbarian' || origin.name == 'Teir Meranthas' %>
+Select another weapon (pick one)<p>
+<% sklz =  Skill.find(:all, :order => 'name', :conditions => "tag = 'weapon' or tag = 'ranged'"); oskills.each {|os| sklz.delete(os.skill)}; for sk in sklz %>
+<%= radio_button_tag "weapon", sk.id, false %> <%= link_to sk.name, :controller => 'skills', :action => 'show', :id => sk.id %><br/>
+<% end %>
+<% end %>

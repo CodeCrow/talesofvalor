@@ -1,0 +1,9 @@
+<h1>Editing PEL</h1>
+
+<% form_tag :action => 'update', :id => @pel do %>
+  <%= render :partial => 'form', :locals => { :player => @pel.player, :event => @pel.event, :attended => @attend } %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @pel %> |
+<%= link_to 'Back', :action => :show, :controller => :players, :id => @pel.player_id %>

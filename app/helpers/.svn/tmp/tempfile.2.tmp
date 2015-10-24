@@ -1,0 +1,12 @@
+# Methods added to this helper will be available to all templates in the application.
+require 'pdf/writer'
+require 'pdf/simpletable'
+module ApplicationHelper
+
+  def themeSelect
+    #@themes = Theme.themes
+    #render(:partial => "shared/choose_theme", :locals => {:themes => themes})
+    render(:partial => "shared/choose_theme")
+  end
+
+end

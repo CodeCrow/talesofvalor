@@ -1,0 +1,97 @@
+<div id="tagshow">
+<h1>Tag: <%= @tag.tag %></h1>
+<div id="filterbox">
+Owner: <%= link_to @tag.owner.name, :controller => :players, :action => :show, :id => @tag.owner %><br>
+
+
+</div>
+<div id="actionbox"><%= link_to 'List', :action => :list %>
+</div>
+
+<div id="tagleft">
+<% if not @players.empty? %>
+<b>Affiliated Staff:</b>
+<ul>
+<% for player in @players %>
+<li><%= link_to player.name, :controller => :players, :action => :show, :id => player.id %>
+(<%= link_to 'Untag', :action => :untag, :tag => @tag.id, :id => player.id, :type => "PlayerTag" %>)
+</li>
+<% end %>
+</ul>
+<% end %>
+
+<% if not @headers.empty? %>
+<b>Affiliated Headers:</b>
+<ul>
+<% for header in @headers %>
+<li><%= link_to header.name, :controller => :headers, :action => :show, :id => header.id %>
+(<%= link_to 'Untag', :action => :untag, :tag => @tag.id, :id => header.id, :type => "HeaderTag" %>)
+</li>
+<% end %>
+</ul>
+<% end %>
+</div>
+<div id="tagright">
+<% if not @skills.empty? %>
+<b>Affiliated Skills:</b>
+<ul>
+<% for skill in @skills %>
+<li><%= link_to skill.name, :controller => :skills, :action => :show, :id => skill.id %>
+(<%= link_to 'Untag', :action => :untag, :tag => @tag.id, :id => skill.id, :type => "SkillTag" %>)
+</li>
+<% end %>
+</ul>
+<% end %>
+
+<% if not @chars.empty? %>
+<b>Affiliated Characters:</b>
+<ul>
+<% for char in @chars %>
+<li><%= link_to char.name, :controller => :chars, :action => :show, :id => char.id %>
+(<%= link_to 'Untag', :action => :untag, :tag => @tag.id, :id => char.id, :type => "CharTag" %>)
+</li>
+<% end %>
+</ul>
+<% end %>
+</div>
+<div id="tagcenter">
+<b>Description:</b> (<%= link_to 'Edit', :action => :edit, :tag => @tag.tag %>)
+<%= simple_format(h @tag.description) %>
+
+<% if session[:staff] and not @tag.hidden_description.empty? %>
+<b>Hidden Description</b>
+<%= simple_format(h @tag.hidden_description) %>
+<% end %>
+</div>
+<div id="tagmain">
+<% if not @bgs.empty? %>
+<b>Affiliated BGS:</b>
+<ul>
+<% for bgs in @bgs %>
+<li>
+<%= link_to 'Show', :controller => :bgs, :action => :show, :id => bgs.id %> -
+<%= link_to bgs.char.name, :controller => :chars, :action => :show, :id => bgs.char.id if bgs.char %> using
+<%= link_to bgs.skill.name, :controller => :skills, :action => :show, :id => bgs.skill.id %> for
+<%= link_to bgs.event.name, :controller => :events, :action => :show, :id => bgs.event.id %> -
+<%= link_to 'Untag', :action => :untag, :tag => @tag.id, :id => bgs.id, :type => "BGSTag" %>
+<%= simple_format(truncate(h( bgs.question),100)) %>
+</li>
+<% end %>
+</ul>
+<% end %>
+
+<% if not @pels.empty? %>
+<b>Affiliated PELs:</b>
+<ul>
+<% for pel in @pels %>
+<li>
+<%= link_to pel.event.name, :controller => :events, :action => :show, :id => pel.event.id %> -
+<%= link_to pel.player.name, :controller => :players, :action => :show, :id => pel.player.id %> -
+<%= link_to 'Show', :controller => :pels, :action => :show, :id => char.id %>
+</li>
+<% end %>
+</ul>
+<% end %>
+</div>
+
+</div>

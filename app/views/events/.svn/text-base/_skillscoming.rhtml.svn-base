@@ -1,0 +1,10 @@
+<h3>PC Skills coming to <%= event.name %></h3>
+<ul>
+<% i = 0 %>
+<% for s in skills %>
+<li><%= s.count %> <%= link_to s.name, :controller => :skills, :action => :show, :id => s.id %>
+(<%= link_to_remote('Who?', :update => "eventwindow#{i}", :url => {:action => :skillscomingbychar, :id => event.id, :skill_id => s.id, :counter => i } ) %>)
+<div id="eventwindow<%= i %>"></div></li>
+<% i=i+1
+   end %>
+</ul>

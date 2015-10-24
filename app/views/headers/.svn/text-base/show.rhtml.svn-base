@@ -1,0 +1,24 @@
+<h1><%= @header.name %></h1>
+
+<%= render :partial => "tags/tagspot", :locals => {:id => @header.id, :type => "HeaderTag"} %>
+
+<p><%= @header.hidden? ? "<i>Hidden</i>" : "" %> <b><%= @header.category %></b></p>
+
+<p>Open for <%= @header.cost %> CPs</p>
+
+<p><b>Description:</b>
+<%= simple_format(@header.description) %>
+</p>
+
+<b>Skills</b>
+<ul>
+<% for skh in @skheaders %>
+<li><%= link_to skh.skill.name, :controller => 'skills', :action => 'show', :id => skh.skill %> - <%= skh.cost %> CPs</li>
+<% end %>
+</ul>
+
+<% if session[:admin] %>
+<%= link_to 'Edit', :action => 'edit', :id => @header %> |
+<% end %>
+<%= link_to 'Print', :action => 'print', :id => @header %> | 
+<%= link_to 'List', :action => 'list' %>

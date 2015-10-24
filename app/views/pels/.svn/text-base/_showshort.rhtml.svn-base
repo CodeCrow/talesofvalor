@@ -1,0 +1,30 @@
+<% if pel.player.acl != "Player" %><font color="red">Staff</font><% else %>Player<% end %>:
+<%= link_to pel.player.name, :action => :show, :controller => :players, :id => pel.player.id %>
+<br>
+<% if attend and attend.char %>
+Character: <%= link_to attend.char.name, :action => :show, :controller => :chars, :id => attend.char.id %><br>
+<% end %>
+Event: <%= link_to pel.event.name, :action => :show, :controller => :events, :id => pel.event.id %><br>
+Submitted: <%= h pel.submit_date.strftime("%b %d %Y") %><br>
+Rating: <%= image_tag("star"+pel.rating.to_s+".gif") %>
+<% if session[:admin] %>
+- <%= link_to 'Edit', :action => 'edit', :id => pel %>
+<%= link_to 'Destroy', { :action => 'destroy', :id => pel }, :confirm => 'Are you sure?', :method => :post %>
+<% end %>
+</br>
+<p>
+
+<b>Suggestions</b>
+<%= simple_format(h pel.dislikes) %>
+
+<b>Event Favorites</b>
+<%= simple_format(h pel.likes) %>
+
+<br>
+<div id="pel_rest">
+<%= link_to_remote 'View Rest', :update => "pel_rest", :url => { :action => :showrest, :id => pel.id } %>
+</div>
+
+<div id="pel_<%= pel.id %>_comments">
+<%= render :partial => "pels/comments", :locals => { :id => pel.id, :comments => @comments, :addcomment => false, :pel => pel } %>
+</div>

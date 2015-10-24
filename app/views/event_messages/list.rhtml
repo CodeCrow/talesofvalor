@@ -1,0 +1,37 @@
+<h1>Event Message List</h1>
+
+<% if @event %>
+Event: <%= link_to @event.name, :controller => :events, :action => :show, :id => @event.id %>
+<% end %>
+<% if @char %>
+Char: <%= link_to @char.name, :controller => :chars, :action => :show, :id => @char.id %>
+<% end %>
+
+<table width="100%">
+<tr>
+<% if not @event %>
+<th align=left>Event</th>
+<% end %>
+<% if not @char %>
+<th align=left>Char</th>
+<% end %>
+<th align=left>Message</th>
+<th align=left width=100>Actions</th>
+</tr>
+
+<% for em in @emlist %>
+<tr>
+<% if not @event %>
+<td><%= link_to em.event.name, :controller => :events, :action => :show, :id => em.event.id %></td>
+<% end %>
+
+<% if not @char %>
+<td><%= link_to em.char.name, :controller => :chars, :action => :show, :id => em.char.id %></td>
+<% end %>
+<td><%= simple_format(h em.message) %></td>
+<td><%= link_to 'Edit', :action => :edit, :id => em.id %> |
+<%= link_to 'Destroy', { :action => 'destroy', :id => em.id }, :confirm => 'Are you sure?', :method => :post %></td>
+</tr>
+
+<% end %>
+</table>

@@ -1,0 +1,10 @@
+<%= error_messages_for 'grant' %>
+
+<!--[form:grant]-->
+<p><label for="grant_reason">Reason</label><br/>
+<%= text_area 'grant', 'reason'  %></p>
+
+<p><label for="grant_picks_left">Picks left</label><br/>
+<%= text_field 'grant', 'picks_left'  %></p>
+<!--[eoform:grant]-->
+

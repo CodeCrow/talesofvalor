@@ -1,0 +1,108 @@
+<%= render :partial => 'progressbar', :locals => {:char => @char } %>
+<h1>Pick skills for <%= @char.send('name') %></h1>
+<%= link_to 'Back to Show', :action => 'show', :id => @char %>
+
+<% if @char.player %>
+<p><b>Player:</b> <%= link_to @char.player.name, :controller => :players, :action => :show, :id => @char.player %></p>
+<% end %>
+
+<div id="cpstats"><%= render :partial => "cpstats", :locals => {:char => @char } %></div>
+
+<p class="instruction">Click "Purchase" to open a header and "Update and ..." to commit changes to skill counts.</p>
+<p class="instruction">Currently the website does not enforce skill purchasing rules. Until such time we ask that you observe rules specific to the buying of skills. This will be enforced by random checking of the characters. Thanks!</p>
+<% form_tag({ :action => 'dopick', :id => @char},{:name => :skills}) do %>
+
+<%= submit_tag 'Update and Continue' %>
+<%= submit_tag 'Update and Exit' %>
+<div id="headerpick">
+<h2>Open Skills</h2>
+<table width="100%"><tr>
+<% count = 0; lasttag = ""; for skh in @sbyh[0] %>
+<% if skh.skill.tag != lasttag %></tr><tr><td><b><%= skh.skill.tag.capitalize %></b></td></tr><tr><% lasttag = skh.skill.tag; count=0; end %>
+<td><%= render :partial => "skills/pick", :locals => {:skill => skh.skill, :cskills => @cskills, :cskillsleft => @cskillsleft, :costs => @costs} %></td>
+<% count=count+1; if count % 2 == 0 %></tr><tr><% end %>
+<% end %>
+</tr></table>
+
+<h2>Headers</h2>
+<table width="100%"><tr>
+<% count = 0; for h in @cheaders %>
+<td><%= render :partial => "headers/pick", :locals => {:h => h, :cheaders => @cheaders, :sbyh => @sbyh, :cskills => @cskills, :cskillsleft => @cskillsleft, :costs => @costs, :h => h, :char => @char  } %></td>
+<% count=count+1; if count % 2 == 0 %></tr><tr><% end %>
+<% end %>
+
+<% lasthidden = false; for h in Header.find(:all, :order => "hidden,category,name") - @cheaders %>
+<% next if (!session[:staff] && h.hidden? && !@hgrants.include?(h.id)) %>
+<% if (h.hidden? && !lasthidden) %></tr><tr><td colspan=2 align=center><b><font size="+1">Hidden Headers</font></b></td></tr><tr><% count=0; lasthidden = true; end %>
+<td><%= render :partial => "headers/closedpick", :locals => {:h => h, :char => @char, :hcosts => @hcosts } %></td>
+<% count=count+1; if count % 2 == 0 %></tr><tr><% end %>
+<% end %>
+</table>
+</div>
+
+<h2>Grants</h2>
+<table width="100%"><tr>
+<% count = 0; for sk in @grants %>
+<% if @cskillsleft.include?(sk.id) %>
+<td><%= render :partial => "skills/pick", :locals => {:skill => sk, :cskills => @cskills, :cskillsleft => @cskillsleft, :costs => @costs} %></td>
+<% count=count+1; if count % 2 == 0 %></tr><tr><% end; end %>
+<% end %>
+</tr></table>
+
+<h2>Dabble</h2>
+<table width="100%"><tr>
+<% count = 0; for skh in @dabbles %>
+<td><%= render :partial => "skills/pick", :locals => {:skill => skh.skill, :cskills => @cskills, :cskillsleft => @cskillsleft, :costs => @costs} %></td>
+<% count=count+1; if count % 2 == 0 %></tr><tr><% end %>
+<% end %>
+</tr></table>
+
+<% if !@cskillsleft.empty? %>
+<h2>Loose Skills</h2>
+<table width="100%"><tr>
+<% count = 0; for sk in @cskillsleft.collect {|s| Skill.find(s) } %>
+<% if @costs[sk.id] %>
+<td><%= render :partial => "skills/pick", :locals => {:skill => sk, :cskills => @cskills, :cskillsleft => @cskillsleft, :costs => @costs} %></td>
+<% else %>
+<td><%= sk.flag? ? "" : @cskills[sk.id] %> <%= link_to sk.name, :controller => 'skills', :action => 'show', :id => sk.id %></td>
+<% end %>
+<% count=count+1; if count % 2 == 0 %></tr><tr><% end %>
+<% end %>
+</tr></table>
+<% end %>
+
+
+<%= submit_tag 'Update and Continue' %>
+<%= submit_tag 'Update and Exit' %>
+<% end %>
+
+<p>
+<%= link_to 'Show', :action => 'show', :id => @char %> |
+<%= link_to 'Edit', :action => 'edit', :id => @char %>
+<% if session[:staff] %>
+| <%= link_to 'Character List', :action => 'list' %>
+<% end %>
+</p>
+
+<script>// <!--
+function updateall(base) {
+  for(var i = 0; i < base.form.elements.length; i++) {
+    var e = base.form.elements[i];
+    if (e.name == base.name) {
+      e.value = base.value;
+    }
+  }
+}
+
+function addhandlers(f) {
+  for(var i = 0; i < f.elements.length; i++) {
+    var e = f.elements[i];
+    if (e.type == "text") {
+      e.onkeyup  = function(event) { updateall(this,event); }
+      e.onchange = function(event) { updateall(this,event); }
+    }
+  }  
+}
+addhandlers(document.skills);
+// -->
+</script>

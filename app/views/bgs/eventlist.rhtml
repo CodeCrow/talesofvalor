@@ -1,0 +1,72 @@
+<h1>Between Game Skills for <%= @event.name %></h1>
+
+<div id="filterbox">
+<% form_tag({:action => 'eventlist'}, :method => "get", :name => :selectors) do %>
+Select Event: <%= select_tag 'event_id', options_for_select(Event.find(:all, :order => "date").collect {|e| [e.name,e.id]},@event.id), :onChange => "selectors.submit();" %>
+Assigned to: <%= select_tag 'assigned', options_for_select(@assignees,@assigned.to_i), :onChange => "selectors.submit();" %><br>
+Answered: <%= select_tag 'answered', options_for_select(@answers,@answered), :onChange => "selectors.submit();" %>
+Skill: <%= select_tag 'skill', options_for_select(@skills,@skill.to_i), :onChange => "selectors.submit();" %><br>
+Filter out staff
+<%= check_box_tag "filterstaff", "1", @filterstaff, :onChange => "selectors.submit();" %>
+Keyword <%= text_field_tag 'searchstring', @search %>
+<%= submit_tag 'Search' %>
+<% end %>
+</div>
+<div id="actionbox">
+Event: <%= link_to @event.name, :controller => :events, :action => :show, :id => @event.id %>
+<p>
+<%= link_to 'Print Selected', :event_id => params[:event_id], :assigned => params[:assigned], :skill => params[:skill], :searchstring => params[:searchstring], :print => :yes %>
+</div>
+<div id="eventinfo">
+<table class="evbgstable">
+<tr><th align=left width="15%">Player</th><th align=left width="150px">Character</th><th align=left width="150px">Skill</th><th align=left>Date</th><th></th><th align=left width="100px">Assigned To</th></tr>
+<% for bgs in @bgss %>
+<tr<%= bgs.char.npc ? " bgcolor=#ffdddd" : "" %>>
+<% if bgs.char and bgs.char.player %>
+<td><%= link_to bgs.char.player.name, :controller => :players, :action => :show, :id => bgs.char.player.id %>
+<%= "<br><font color=red>UNREGISTERED</font>" unless @regs[bgs.char.player_id] %>
+<%= "<font color=red>STAFF</font>" if bgs.char.npc %></td>
+<% else %>
+<td>Unknown player</td>
+<% end %>
+<td><%= link_to bgs.char.name, :controller => :chars, :action => :show, :id => bgs.char.id %></td>
+<td><b><%= bgs.count %></b> <%= link_to bgs.skill.name, :action => :show, :controller => :skills, :id => bgs.skill.id %></td>
+<td><%= bgs.submit_date.strftime("%d %b %Y") %></td>
+<td><%= render :partial => "tags/tagspot", :locals => {:id => bgs.id, :type => "BGSTag"} %></td>
+<td>
+<div id="bgs_<%= bgs.id %>_assignee">
+<% if bgs.answering_player %>
+<%= link_to bgs.answering_player.name, :controller => :players, :action => :show, :id => bgs.answering_player %>
+<% end %>
+</div>
+</td>
+</tr>
+<tr><td colspan="2" valign=top class="special<%= bgs.char.npc ? "npc" : "" %>">
+<div id="bgs_<%= bgs.id %>_comments">
+<% if @search %>
+<%= render_component :controller => "bgs", :action => "comments", :id => bgs.id %>
+<% elsif @bgsd[bgs.id] %>
+Discussion: <%= @bgsd[bgs.id][:count] %> posts<br>
+Last post by <%= link_to @bgsd[bgs.id][:name], :controller => :players, :action => :show, :id => @bgsd[bgs.id][:id] %> 
+on <%= @bgsd[bgs.id][:date].strftime("%d %b %Y") %>:<br>
+<%= simple_format(h @bgsd[bgs.id][:comment]) %>
+<% else %>
+No Discussion
+<% end %>
+</div>
+</td>
+<td colspan="4" valign=top class="special<%= bgs.char.npc ? "npc" : "" %>">
+<div id="bgs_<%= bgs.id %>_qanda">
+<% if @search %>
+<%= render_component :controller => "bgs", :action => "expand", :id => bgs.id, :params => {:search => @search } %>
+<% else %>
+<b>Question</b>: <%= simple_format(h bgs.question) %>
+<b><%= bgs.answer.empty? ? "Not Answered" : "Answered" %></b> --
+<%= link_to_remote("EXPAND", :update => "bgs_#{bgs.id}_qanda", :url => { :action => :expand, :id => bgs },:success => remote_function(:update => "bgs_#{bgs.id}_comments", :url => { :action => :comments, :id => bgs.id })) %>
+<% end %>
+</div>
+</td></tr>
+<% @lastchar = bgs.char
+   end %>
+</table>
+</div>

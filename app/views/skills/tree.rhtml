@@ -1,0 +1,50 @@
+<div id="skilltree">
+<h1>Skill Tree</h1>
+<div class="treeopen">
+<ul>
+<li><b><font size="+1">Open Skills</font></b></li><ul>
+<% lasttag = ""; for skh in @opensk %>
+<% if skh.skill.tag != lasttag; lasttag = skh.skill.tag %>
+<br><b><%= skh.skill.tag.capitalize %></b><br>
+<% end %>
+<li><%= link_to skh.skill.name, :action => 'show', :id => skh.skill %> (<%= skh.cost %> CPs)</li>
+<% end %>
+</ul>
+</div>
+<!-- Old Structure
+<div class="treeul">
+<ul>
+<% last, lastc = [], "" %>
+<% for skh in @skheaders %>
+<% if skh.header_id != last %>
+<% last = skh.header_id %>
+</ul>
+<% if skh.header.category != lastc %>
+<br><br><font size="+2"><b><%= skh.header.category %>s</b></font>
+<% lastc = skh.header.category %>
+<% end %>
+<li><font size="+1"><b><%= link_to skh.header.name, :controller => 'headers', :action => 'show', :id => skh.header %></b></font></li><hr><ul>
+<% end %>
+<li><%= link_to skh.skill.name, :action => 'show', :id => skh.skill %> (<%= skh.cost %> CPs)</li>
+<% end %>
+</ul>
+</div> -->
+
+<div class="treeul">
+<ul>
+<% last, lastc = [], "" %>
+<% for skh in @skheaders %>
+<% if skh.header_id != last %>
+<% last = skh.header_id %>
+</ul><ul>
+<% if skh.header.category != lastc %>
+<br><br><font size="+2"><b><%= skh.header.category %>s</b></font>
+<% lastc = skh.header.category %>
+<% end %></ul>
+<li><hr><font size="+1"><b><%= link_to skh.header.name, :controller => 'headers', :action => 'show', :id => skh.header %></b></font></li><ul>
+<% end %>
+<li><%= link_to skh.skill.name, :action => 'show', :id => skh.skill %> (<%= skh.cost %> CPs)</li>
+<% end %>
+</ul>
+</div>
+</div>

@@ -1,0 +1,21 @@
+<h1>Harvest Players from main site</h1>
+
+<% form_tag :action => 'harvest' do %>
+<%= select_tag 'type', options_for_select(['all','username','name','email'],params[:type] ) %>
+containing <%= text_field_tag 'term', params[:term], :size=>10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+
+<p>
+
+<table>
+<tr><th>Name</th><th>Username</th><th>Email</th><th>Harvest</th></tr>
+<% for nu in @nus %>
+<tr><td><%= nu.name %></td><td><%= nu.username %></td><td><%= nu.user_email %></td>
+<% if not Player.find(:first, :conditions => ["username = ?",nu.username]) %>
+<td><%= link_to 'Grab', :action => 'grab', :username => nu.username %></td></tr>
+<% else %>
+<td>Already harvested</td>
+<% end %>
+<% end %>
+</table>

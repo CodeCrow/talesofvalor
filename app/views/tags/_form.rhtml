@@ -1,0 +1,19 @@
+<%= error_messages_for 'tag_description' %>
+
+<!--[form:tag_description]-->
+<p><label for="tag_description_tag">Tag</label><br/>
+<%= text_field_tag 'tag_description[tag]', @tag_description.tag  %></p>
+
+<p><label for="tag_description_description">Description</label><br/>
+<%= text_area 'tag_description', 'description'  %></p>
+
+<p><label for="tag_description_hidden_description">Hidden Description</label><br/>
+<%= text_area 'tag_description', 'hidden_description'  %></p>
+
+<p><label for="tag_description_hidden">Hidden?</label><br/>
+<select id="tag_description_flag" name="tag_description[hidden]"><option value="false" <%= @tag_description.hidden? ? "" : "selected" %>>False</option><option value="true" <%= @tag_description.hidden? ? "selected" : "" %>>True</option></select></p>
+
+<p><label for="tag_description_owner_id">Owner</label><br/>
+<%= select 'tag_description', 'owner_id', @staff %></p>
+
+<!--[eoform:tag_description]-->

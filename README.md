@@ -1,2 +1,2 @@
 # talesofvalor
-Creating new version of character database for Tales of Valor
+New Update for Tales of Valor

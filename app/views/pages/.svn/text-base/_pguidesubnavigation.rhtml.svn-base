@@ -1,0 +1,4 @@
+<div class="filterbox">
+<%= link_to "Part 1", :controller => :pages, :action => :pguide1 %> : <%= link_to "Part 2 - Your First Event", :controller => :pages, :action => :pguide2 %> : 
+
+</div>

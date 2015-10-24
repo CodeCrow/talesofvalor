@@ -1,0 +1,5 @@
+<% form_remote_tag :html => {:action => "#", :name => "formtag#{id}"}, :update => "tag#{id}", :url => { :controller => :tags, :action => :addtag, :id => id, :type => type} do %>
+<%= select_tag 'tag', options_for_select(tags) %>
+<%= submit_tag "Tag" %>
+<% end %>
+<%= Tag.find(:all, :conditions => {:foreign_id => id, :type => type}).collect {|t| link_to t.tag, :controller => :tags, :action => :show, :tag => t.tag }.join(",") %>

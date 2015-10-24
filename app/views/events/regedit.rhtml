@@ -1,0 +1,41 @@
+<h2>Editing registration for <%= @reg.player.name %>, <%= @reg.event.name %></h2>
+
+<% form_tag({:action => 'regsubmit', :reg_id => @reg.id, :name => :reg}) do %>
+
+<table width="100%">
+<tr><td>
+<b>Mealplan:</b><br>
+<% for meal in @meals %>
+&nbsp;&nbsp;<%= radio_button_tag 'mealplan', meal, @reg.mealplan == meal %> <%= meal %><br>
+<% end %>
+&nbsp;&nbsp;<%= radio_button_tag 'mealplan', '' %> --BLANK--<br>
+OR Enter New: <%= text_field_tag 'mealplannew', "", :size => 10, :onKeyDown => "clearradios('mealplan');" %>
+</td>
+
+<td>
+<b>Cabin:</b><br>
+<% for cabin in @cabins %>
+&nbsp;&nbsp;<%= radio_button_tag 'cabin', cabin, @reg.cabin == cabin %> <%= cabin %><br>
+<% end %>
+&nbsp;&nbsp;<%= radio_button_tag 'cabin', '' %> --BLANK--<br>
+OR Enter New: <%= text_field_tag 'cabinnew', "", :size => 10, :onKeyDown => "clearradios('cabin');" %>
+</td></tr>
+
+<tr><td colspan=2><br><b>Notes:</b> <%= text_field_tag 'notes', @reg.notes, :size => 50 %></td></tr>
+</table>
+
+<% javascript_tag do -%>
+function clearradios(which)
+{
+  var len = document.forms[0].elements.length;
+  for (var i=0; i < len; i++) {
+    var e = document.forms[0].elements[i];
+    if (e.type == "radio" && e.name == which) e.checked = false;
+  }
+}
+<%- end %>
+
+<%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Back to event', :action => :show, :id => @reg.event.id %>

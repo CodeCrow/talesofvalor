@@ -1,0 +1,13 @@
+<h1>New Event Message</h1>
+
+<ul>
+<li><b>Character</b>: <%= link_to @char.name, :controller => :chars, :action => :show, :id => @char.id %></li>
+<li><b>Event</b>: <%= link_to @event.name, :controller => :events, :action => :show, :id => @event.id %></li>
+</ul>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create" %>
+<% end %>
+
+<%= link_to 'Back to event', :controller => :events, :action => :show, :id => @event.id %>

@@ -1,0 +1,52 @@
+<%= render :partial => 'regnavigation' %>
+<h1>Listing events</h1>
+
+<h2>Future Events</h2>
+<table>
+  <tr><th>Name</th><th>Date</th><th>Deadlines</th><th>Flags</th></tr>
+  
+<% for event in @future %>
+  <tr>
+    <td><%= link_to event.name, :action => :show, :id => event %></td>
+    <td><%= h event.date.strftime("%b %d %Y") %></td>
+    <td>
+<% if event.bgs_p %>
+BGS by <%= h event.bgs_by.strftime("%b %d %Y") %><br />
+<% end %>
+	PEL by <%= h event.pel_by.strftime("%b %d %Y") %></td>
+    <td><%= !event.bgs_p ? "No BGS" : "" %> <%= event.oog_p ? "OOG" : "" %></td>
+<% if session[:admin] %>
+    <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+
+<h2>Past Events</h2>
+<table>
+  <tr><th>Name</th><th>Date</th><th>Deadlines</th><th>Flags</th></tr>
+  
+<% for event in @past %>
+  <tr>
+    <td><%= link_to event.name, :action => :show, :id => event %></td>
+    <td><%= h event.date.strftime("%b %d %Y") %></td>
+    <td>
+<% if event.bgs_p %>
+BGS by <%= h event.bgs_by.strftime("%b %d %Y") %><br />
+<% end %>
+	PEL by <%= h event.pel_by.strftime("%b %d %Y") %></td>
+    <td><%= !event.bgs_p ? "No BGS" : "" %> <%= event.oog_p ? "OOG" : "" %></td>
+<% if session[:admin] %>
+    <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :method => :post %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:admin] %>
+<%= link_to 'New event', :action => 'new' %>
+<% end %>

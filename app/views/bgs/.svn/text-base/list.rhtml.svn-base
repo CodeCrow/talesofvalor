@@ -1,0 +1,40 @@
+<h1>Listing Between Game Skills</h1>
+
+Event: <%= link_to @event.name, :controller => :events, :action => :show, :id => @event.id %>
+<%= "-- BGS Deadline is "+@event.bgs_by.strftime("%d %b %Y") if @event.bgs_p %>
+<%= "-- No BGS allowed" unless @event.bgs_p %><br>
+Player: <%= link_to @player.name, :controller => :players, :action => :show, :id => @player.id %><br>
+Character: <%= link_to @char.name, :controller => :chars, :action => :show, :id => @char.id %><br>
+
+<% if @bgsopen %>
+Submit:<br>
+<b><%= @char.name %>'s Skills</b>: <%= (@char.between_game_skills.collect {|b| link_to("New "+b.name, :controller => :bgs, :action => :new, :event_id => @event.id, :char_id => @char.id, :skill_id => b.id) }).join(" | ") %><br><hr>
+<b>Open Skills</b>: <%= (@bgsopenskills.collect {|b| link_to("New "+b.name, :controller => :bgs, :action => :new, :event_id => @event.id, :char_id => @char.id, :skill_id => b.id)}).join(" | ") %>
+<br>
+<% else %>
+Between game skill submission is closed.<br>
+<% end %>
+<div class="bgsdiv">
+<% if not @bgs.empty? %>
+Current Submissions:
+
+<ul class="bgsheader">
+<% for bgsset in @bgs.values %>
+<li><%= link_to bgsset[0].skill.name, :controller => :skills, :action => :show, :id => bgsset[0].skill.id %> (<%= @bgscount[bgsset[0].skill.id].join("/") %> used)
+<ul class="bgsquest">
+<% for bgs in bgsset %>
+<li><%= simple_format(bgs.question) %> 
+(<%= bgs.count %> <%= bgs.skill.name %>
+<% if @bgsopen %>
+-- <%= link_to 'Edit', :action => 'edit', :id => bgs %>
+<%= link_to 'Destroy', { :action => 'destroy', :id => bgs }, :confirm => 'Are you sure?', :method => :post %>
+<% end %>
+)</li>
+<hr>
+<% end %>
+</ul>
+</li>
+<% end %>
+</ul>
+<% end %>
+</div>

@@ -1,0 +1,58 @@
+<h1><%=h @char.send('name') + (@char.npc? ? " (NPC)" : "") %></h1>
+
+<p>
+<%= render :partial => 'actions', :locals => {:char => @char } %>
+<% if session[:staff] %>
+| <%= link_to 'List', :action => 'list' %>
+<% end %>
+
+<p><%= render :partial => "cpstats", :locals => {:char => @char } %>
+
+<%= image_tag((@char.picture_url and @char.picture_url.size() > 0 ? ("pictures/"+@char.picture_url) : "no_picture.gif"), :align => :right, :size => "200x240") %>
+
+<h2>Origins</h2>
+<% for o in @origins %>
+<%= o.type.to_s.capitalize %>: <%= link_to o.name, :controller => 'origins', :action => 'show', :id => o %><br/>
+<% end %>
+
+<h2>Skills</h2>
+<ul><li><font size="+1"><b>Open Skills</b></font><ul>
+<% for skh in @sbyh[0] %>
+<% if @cskills[skh.skill_id] && @cskillsleft.delete(skh.skill_id) %>
+<li><%= skh.skill.flag? ? "" : @cskills[skh.skill_id].count %> <%= link_to skh.skill.name, :controller => 'skills', :action => 'show', :id => skh.skill %></li>
+<% end %>
+<% end %>
+</ul></li>
+
+<% if !@cheaders.empty? %>
+<li><font size="+1"><b>Headers</b></font><ul>
+<% for h in @cheaders %>
+<li><b><%= link_to h.name, :controller => 'headers', :action => 'show', :id => h %></b><ul>
+<% if @sbyh[h.id] %>
+<% for skh in @sbyh[h.id] %>
+<% if @cskills[skh.skill_id] && @cskillsleft.delete(skh.skill_id) %>
+<li><%= skh.skill.flag? ? "" : @cskills[skh.skill_id].count %> <%= link_to skh.skill.name, :controller => 'skills', :action => 'show', :id => skh.skill %></li>
+<% end %>
+<% end %>
+<% end %>
+</ul></li>
+<% end %>
+</ul></li>
+<% end %>
+
+<% if !@cskillsleft.empty? %>
+<li><font size="+1"><b>Other Skills</b></font><ul>
+<% for sk in @cskillsleft.collect {|s| Skill.find(s) } %>
+<li><%= sk.flag? ? "" : @cskills[sk.id].count %> <%= link_to sk.name, :controller => 'skills', :action => 'show', :id => sk.id %></li>
+<% end %>
+</ul></li>
+<% end %>
+</ul>
+
+<p><b>Player Notes:</b><%= simple_format(@char.player_notes) %></p>
+<p><b>Visible Staff Notes:</b><%= simple_format(@char.visible_staff_notes) %></p>
+
+<%= render :partial => 'actions', :locals => {:char => @char } %>
+<% if session[:staff] %>
+| <%= link_to 'List', :action => 'list' %>
+<% end %>

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/fodder_svn/!svn/ver/717/site/trunk/app/views/origins
+END
+_selectvalue.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/fodder_svn/!svn/ver/717/site/trunk/app/views/origins/_selectvalue.rhtml
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/530/site/trunk/app/views/origins/list.rhtml
+END
+_select.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/fodder_svn/!svn/ver/140/site/trunk/app/views/origins/_select.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/views/origins/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/views/origins/_form.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/views/origins/edit.rhtml
+END
+pick.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/views/origins/pick.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/140/site/trunk/app/views/origins/new.rhtml
+END

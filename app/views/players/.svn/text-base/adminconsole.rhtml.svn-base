@@ -1,0 +1,12 @@
+<h1>Admin Console</h1>
+
+<ul>
+<li><%= button_to "Reset Point Cap", { :action => "resetpointcap" }, :confirm => "Are you sure?" %></li>
+
+<li><%= link_to "Harvest", :controller => :players, :action=> :harvest %> - 
+pull player info from main website; done automatically when they first log in</li>
+
+<li><%= link_to 'Drop to Staff Privileges', :action => :droppriv, :level => :staff  %> - Discard admin privileges until next login</li>
+
+<li><%= link_to 'Drop to Player Privileges', :action => :droppriv, :level => :player %> - Drop to player privileges until next login</li>
+</ul>

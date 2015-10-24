@@ -1,0 +1,19 @@
+<%= error_messages_for 'header' %>
+
+<!--[form:header]-->
+<p><label for="header_name">Name</label><br/>
+<%= text_field 'header', 'name'  %></p>
+
+<p><label for="header_category">Category</label><br/>
+<%= text_field 'header', 'category'  %></p>
+
+<p><label for="header_description">Description</label><br/>
+<%= text_area 'header', 'description'  %></p>
+
+<p><label for="header_cost">Cost</label><br/>
+<%= text_field 'header', 'cost', :size => "2"  %></p>
+
+<p><label for="header_hidden">Hidden?</label><br/>
+<select id="header_hidden" name="header[hidden]"><option value="false" <%= @header.hidden? ? "" : "selected" %>>False</option><option value="true" <%= @header.hidden? ? "selected" : "" %>>True</option></select></p>
+<!--[eoform:header]-->
+

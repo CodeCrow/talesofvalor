@@ -1,0 +1,9 @@
+<% for l in logs %>
+<li><tt><%= l.ts %></tt><br>
+<%= l.entry %></li>
+<% end %>
+<% if start %>
+<div id="restoflog">
+<%= link_to_remote("Rest of log", :update => 'restoflog', :url => { :action => :getlog, :id => player.id}) %>
+</div>
+<% end %>

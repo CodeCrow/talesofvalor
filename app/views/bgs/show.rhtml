@@ -1,0 +1,22 @@
+<%= render :partial => "tags/tagspot", :locals => {:id => @bgs.id, :type => "BGSTag"} %>
+<ul>
+<li><b>Character</b>: <%= link_to @bgs.char.name, :controller => :chars, :action => :show, :id => @bgs.char.id %></li>
+<li><b>Event</b>: <%= link_to @bgs.event.name, :controller => :events, :action => :show, :id => @bgs.event.id %></li>
+<li><b>Skill</b>: <%= link_to @bgs.skill.name, :controller => :skills, :action => :show, :id => @bgs.skill.id %></li>
+<li>
+<b>Assigned To</b>:<div id="bgs_<%= @bgs.id %>_assignee"> <%= link_to @bgs.answering_player.name, :controller => :players, :action => :show, :id => @bgs.answering_player_id unless not @bgs.answering_player %>
+</div></li>
+</ul>
+<div id="bgs_<%= @bgs.id %>_qanda">
+<b>Question:</b>
+<%= simple_format(h @bgs.question) %>
+<b>Answer:</b>
+<%= simple_format(h @bgs.answer) %>
+<%= link_to_remote("EXPAND", :update => "bgs_#{@bgs.id}_qanda", :url => { :action => :expand, :id => @bgs }) %>
+</div>
+
+<hr width="30%"/>
+
+<div id="bgs_<%= @bgs.id %>_comments">
+<%= render :partial => "bgs/comments", :locals => {:bgs => @bgs, :comments => @bgscomments, :addcomment => false } %>
+</div>

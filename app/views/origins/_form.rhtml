@@ -1,0 +1,16 @@
+<%= error_messages_for 'origin' %>
+
+<!--[form:origin]-->
+<p><label for="origin_name">Name</label><br/>
+<%= text_field 'origin', 'name'  %></p>
+
+<p><label for="origin_type">Type</label><br/>
+<select id="origin_type" name="origin[type]"><option value="Race" <%= @origin.instance_of?(Race) ? "selected" : "" %>>Race</option><option value="Background" <%= @origin.instance_of?(Background) ? "selected" : "" %>>Background</option></select></p>
+
+<p><label for="origin_description">Description</label><br/>
+<%= text_area 'origin', 'description'  %></p>
+
+<p><label for="origin_hidden">Hidden?</label><br/>
+<select id="origin_hidden" name="origin[hidden]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+<!--[eoform:origin]-->
+

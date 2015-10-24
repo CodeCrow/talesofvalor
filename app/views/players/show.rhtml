@@ -1,0 +1,94 @@
+<h1>Player <%= @player.name %>
+<% if @player.admin? %>
+(Admin)
+<% elsif @player.staff? %>
+(Staff)
+<% end %>
+</h1>
+
+<%= render :partial => "tags/tagspot", :locals => {:id => @player.id, :type => "PlayerTag"} %>
+<br><br>
+<div id="actionbox">
+<p><b>Username:</b> <%= @player.username %><br>
+<b>Email:</b> <%= @player.email %><br>
+<b>Game Started:</b> <%= @player.game_started %></p>
+<% if session[:staff] %><div style="float: right;" id="toggle_<%= @player.id %>"><%= render :partial => "players/toggle", :locals => {:player => @player} %></div><% end %>
+</div>
+
+<div id="filterbox">
+<p><b>CP Available:</b> <%= @player.cp_avail %> </p>
+<% form_tag :action => 'xfercps', :id => @player do %>
+&nbsp;&nbsp;&nbsp;<b>Transfer</b> <%= text_field_tag 'points', 0, :size => 3 %> CPs to <%= select_tag('charid', options_for_select(@player.chars.collect {|o| [o.name, o.id] }, @player.active_char_id)) %>
+<%= submit_tag "Transfer" %>
+<% end %>
+<br>
+<p><b>Characters:</b>
+<%= session[:user] == @player ? link_to('Create a character', :controller => :chars, :action => :new) : "" %></p>
+</div>
+<div id="charlisting">
+<table width="100%">
+  <tr><th align="center">Existing Characters</th></tr>
+<% for char in @player.chars %>
+<tr>
+<td width="100%" align="left"><%= link_to char.name, :controller => 'chars', :action => 'show', :id => char %></td>
+<tr>
+<td width="100%" align="right"><%= render :partial => 'chars/actions', :locals => { :char => char } %></td>
+</tr>
+<% end %>
+</table>
+</div>
+<div id="chevents">
+<p><b>Future Events</b>
+<ul>
+<% for event in @futureevents %>
+<li><%= link_to event.name, :action => :show, :controller => :events, :id => event.id %> --
+<%= link_to 'Between Game Skills', :action => :list, :controller => :bgs, :event_id => event.id, :char_id => @player.active_char_id if @player.active_char and event.bgs_p %>
+<% if @regs[event.id] %>
+(Registered
+<%= "as "+link_to(@player.active_char.name, :action => :show, :controller => :chars, :id => @player.active_char_id) if @player.active_char %><%= "--"+link_to("Unregister", :action => :unregister, :registration_id => @regs[event.id].id) if session[:admin] %>)
+<br><%=h (@regs[event.id].notes and !@regs[event.id].notes.empty?) ? "Notes: "+@regs[event.id].notes : "" %>
+<% end %>
+</li>
+<% end %>
+</ul>
+<div id="eventreg">
+<% if session[:admin] or (session[:staff] and session[:user].id == @player.id) %>
+<% form_tag({:action => 'register'}, :method => "post") do %>
+<%= hidden_field_tag "reg[player_id]", @player.id %>
+Register for Event: <%= select_tag 'reg[event_id]', options_for_select(Event.find(:all, :conditions => "date > now()", :order => "date asc").collect {|e| [e.name,e.id]},'') %>
+Notes: <%= text_field 'reg', 'notes', :size => 30 %>
+<%= submit_tag 'Register' %>
+<% end %>
+<% end %>
+</div>
+<p><b>Past Events</b>
+<ul>
+<% for event in @pastevents %>
+<li><%= link_to event.name, :action => :show, :controller => :events, :id => event.id %>
+<% if @atts[event.id] %>
+(Attended as <%= link_to @atts[event.id].char.name, :controller => :chars, :action => :show, :id => @atts[event.id].char.id if @atts[event.id].char %>)
+<% if session[:admin] %>
+-- <%= link_to "Did not attend", :action => :unattend, :attendance_id => @atts[event.id].id %>
+<% end %>
+<% end %>
+-- 
+<% if @pels[event.id] %>
+<%= link_to 'View PEL', :action => :show, :controller => :pels, :id => @pels[event.id] %>
+<% else %>
+<%= link_to 'Enter PEL', :action => :new, :controller => :pels, :event_id => event.id, :player_id => @player.id %>
+<% end %>
+</li>
+<% end %>
+</ul>
+</div>
+<div id="playerlog">
+<h2>Log</h2>
+<%= render :partial => "log", :locals => {:logs => @logs, :player => @player, :start => true } %>
+
+<% if session[:admin] || session[:user] == @player %>
+<p><%= link_to 'Edit', :action => 'edit', :id => @player %>
+<% end %>
+<% if session[:staff] %>
+| <%= link_to 'List', :action => 'list' %></p>
+<% end %>
+</div>

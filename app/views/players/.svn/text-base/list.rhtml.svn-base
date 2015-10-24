@@ -1,0 +1,80 @@
+<h1>Player List: <%= @title %></h1>
+
+<div id="actionbox">
+<%= link_to 'Previous page', { :page => @player_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @player_pages.current.previous %>
+<%= link_to 'Next page', { :page => @player_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @player_pages.current.next %> 
+<%= "<br>" if @player_pages.current.next or @player_pages.current.previous %>
+<%= link_to 'Select Filtered', { :action => :multitoggle, :filter => params[:filter], :filtervalue => params[:filtervalue], :select => true } %> |
+<%= link_to 'Unselect All', :action => 'cleartoggle' %>
+<br>
+Actions: 
+<%= link_to 'Email', :action => :bulkemail %>
+<% if session[:admin] %>
+| <%= link_to image_tag("grant.jpg", :border=>0), :action => :bulkgrantcps%>
+<% form_tag({:action => 'bulkregister'}, :method => "post") do %>
+<%= select_tag 'event_id', options_for_select(Event.find(:all, :order => "date desc").collect {|e| [e.name,e.id]},@nextevent ? @nextevent.id : '') %>
+<%= submit_tag 'Register Selected' %>
+<% end %>
+<% form_tag({:action => 'bulkattended'}, :method => "post") do %>
+<%= select_tag 'event_id', options_for_select(Event.find(:all, :order => "date desc").collect {|e| [e.name,e.id]},@lastevent ? @lastevent.id : '') %>
+<%= submit_tag 'Selected Attended' %>
+<% end %>
+<% end %>
+</div>
+
+<div id="filterbox">
+Filter:
+<%= link_to 'All', :filter => 'all' %> |
+<%= link_to 'Players', :filter => "acl", :filtervalue => "Player" %> |
+<%= link_to 'Staff', :filter => "acl", :filtervalue => "Staff" %> |
+<%= link_to 'Admins', :filter => "acl", :filtervalue => "Admin" %> |
+<%= link_to 'Selected', :filter => "selected" %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "name" %>
+Name: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "registered" %>
+Registered For: <%= select_tag 'filtervalue', options_for_select(Event.find(:all, :order => "date desc").collect {|e| [e.name,e.id]},@nextevent ? @nextevent.id : '') %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "attended" %>
+Attended: <%= select_tag 'filtervalue', options_for_select(Event.find(:all, :order => "date desc").collect {|e| [e.name,e.id]},@nextevent ? @nextevent.id : '') %>
+<%= submit_tag 'Search' %>
+<% end %>
+</div>
+
+<div id="charlisting">
+<table id="playerlist">
+  <tr><th align=left>Sel?</th><th align=left>Name</th><th align=left>Character</th><th align=left>Type</th><th colspan="3">&nbsp;</th></tr>
+  
+<% for player in @players %>
+  <tr>
+    <td width="10%"><div id="toggle_<%= player.id %>"><%= render :partial => "players/toggle", :locals => {:player => player} %></div></td>
+    <td><%= link_to player.send('name'), :action => 'show', :id => player %></td>
+    <td><%= link_to player.active_char.name, :controller => :chars, :action => :show, :id => player.active_char_id if player.active_char %></td>
+    <td><%=h player.send('acl') %></td>
+<!--    <td><%= render :partial => "tags/tagspot", :locals => {:id => player.id, :type => "PlayerTag", :tags => @tags } unless player.acl == 'Player' %></td> -->
+<% if session[:admin] || player == session[:user] %>
+    <td><%= link_to 'Edit', :action => 'edit', :id => player %></td>
+<% end %>
+<% if session[:admin] %>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => player }, :confirm => 'Are you sure?', :method => :post %></td>
+<% if session[:user].active_char %>
+    <td><%= link_to 'Assign Char', :controller => :chars, :action => 'steal', :newowner => player, :id => session[:user].active_char %></td>
+<% end %>
+<% end %>
+  </tr>
+  <tr>
+  <td class="bottom" colspan="7"><%= render :partial => "tags/tagspot", :locals => {:id => player.id, :type => "PlayerTag", :tags => @tags } unless player.acl == 'Player' %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+<div id="bottompagemover">
+<%= link_to 'Previous page', { :page => @player_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @player_pages.current.previous %>
+<%= link_to 'Next page', { :page => @player_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @player_pages.current.next %> 
+</div>
+

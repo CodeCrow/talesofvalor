@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/fodder_svn/!svn/ver/530/site/trunk/app/helpers
+END
+players_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/players_helper.rb
+END
+rules_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/rules_helper.rb
+END
+registrations_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/registrations_helper.rb
+END
+grants_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/grants_helper.rb
+END
+pages_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/530/site/trunk/app/helpers/pages_helper.rb
+END
+chars_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/chars_helper.rb
+END
+skills_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/skills_helper.rb
+END
+theme_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/theme_helper.rb
+END
+pels_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/pels_helper.rb
+END
+application_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/fodder_svn/!svn/ver/144/site/trunk/app/helpers/application_helper.rb
+END
+events_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/events_helper.rb
+END
+event_messages_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/event_messages_helper.rb
+END
+origins_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/origins_helper.rb
+END
+headers_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/headers_helper.rb
+END
+bgs_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/fodder_svn/!svn/ver/140/site/trunk/app/helpers/bgs_helper.rb
+END

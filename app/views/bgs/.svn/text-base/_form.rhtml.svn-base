@@ -1,0 +1,17 @@
+<%= error_messages_for 'bgs' %>
+
+<!--[form:bgs]-->
+<%= hidden_field 'bgs', 'skill_id' %>
+<%= hidden_field 'bgs', 'event_id' %>
+<%= hidden_field 'bgs', 'char_id' %>
+<p><label for="bgs_count">Count</label>
+<%= text_field 'bgs', 'count', :size => 4  %></p>
+<p><label for="bgs_question">Question</label><br/>
+<%= text_area 'bgs', 'question', :rows => 4, :cols => 50  %></p>
+<% if session[:staff] %>
+<p><label for="bgs_answer">Answer</label><br/>
+<%= text_area 'bgs', 'answer', :rows => 10, :cols => 60  %></p>
+<% end %>
+
+<!--[eoform:bgs]-->
+

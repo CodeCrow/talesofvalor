@@ -1,0 +1,27 @@
+<%= error_messages_for 'player' %>
+
+<!--[form:player]-->
+<p>Username: <%= @player.username %></p>
+
+<p><label for="player_name">Name</label><br/>
+<%= text_field 'player', 'name'  %></p>
+
+<p><label for="player_email">Email</label><br/>
+<%= text_field 'player', 'email'  %></p>
+
+<p><label for="player_game_started">Game started</label><br/>
+<%= text_field 'player', 'game_started'  %></p>
+
+<% if session[:staff] %>
+<p><label for="player_cp_avail">Cp avail</label><br/>
+<%= text_field 'player', 'cp_avail'  %></p>
+<% end %>
+
+<% if session[:admin] %>
+<p><label for="player_acl">Access level:</label><br/>
+<% for acl in ['Player', 'Staff', 'Admin'] %>
+<%= radio_button_tag 'player[acl]', acl, @player.acl == acl %> <%= acl %><br/>
+<% end %>
+<% end %>
+
+<!--[eoform:player]-->

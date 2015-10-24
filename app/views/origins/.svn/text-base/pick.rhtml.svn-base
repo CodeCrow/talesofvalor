@@ -1,0 +1,13 @@
+<h1>Pick skill for <%= @origin.name %></h1>
+
+<% form_tag :action => 'addskill', :id => @origin do %>
+
+Skill <%= select('skill', 'id', Skill.find(:all, :order => 'name').collect {|s| [s.name,s.id]}) %>
+Count <%= text_field 'skill', 'count', :size => '3' %>
+  <%= submit_tag 'Add Skill' %>
+<% end %>
+
+<p>
+
+<%= link_to 'Show', :action => 'show', :id => @origin %> |
+<%= link_to 'Back', :action => 'list' %>

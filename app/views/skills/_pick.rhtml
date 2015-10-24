@@ -1,0 +1,8 @@
+<% if skill.flag? %>
+<%= check_box 'picks', skill.id, :value => 1, :checked => cskills[skill.id] && cskills[skill.id].count > 0 %>
+<% else %>
+<%= text_field 'picks', skill.id, :size => '2', :value => cskills[skill.id] ? cskills[skill.id].count : 0 %>
+<% end %>
+<%= link_to skill.name, :controller => 'skills', :action => 'show', :id => skill %>
+<% if costs[skill.id] %> (<%= costs[skill.id] %> CPs each)<% end %>
+<% cskillsleft.delete(skill.id) %>

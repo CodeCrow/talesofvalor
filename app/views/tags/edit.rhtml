@@ -1,0 +1,9 @@
+<h1>Editing Tag Description</h1>
+
+<% form_tag :action => 'update', :id => @tag_description.tag do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :tag => @tag_description.tag %> |
+<%= link_to 'List', :action => 'list' %>

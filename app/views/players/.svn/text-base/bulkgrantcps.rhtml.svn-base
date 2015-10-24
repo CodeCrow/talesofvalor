@@ -1,0 +1,15 @@
+<h1>Grant CPs</h1>
+
+<% form_tag({:action => 'grantcps'}, :method => "post") do %>
+Amount: <%= text_field_tag 'amount', '', :size => 10 %><br>
+Reason: <%= text_field_tag 'reason', '', :size => 20 %><br>
+
+To the following players:
+<ul>
+<% for player in @players %>
+<li><%= link_to player.name, :action => :show, :id => player.id %></li>
+<% end %>
+</ul>
+
+<%= submit_tag 'Grant CPs' %>
+<% end %>

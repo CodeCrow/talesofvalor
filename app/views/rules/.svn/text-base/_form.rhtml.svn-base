@@ -1,0 +1,33 @@
+<%= error_messages_for 'rule' %>
+
+<!--[form:rule]-->
+<p><label for="rule_name">Name</label><br/>
+<%= text_field 'rule', 'name'  %></p>
+
+<p><label for="rule_description">Description</label><br/>
+<%= text_area 'rule', 'description', :rows => 3  %></p>
+
+<p><label for="rule_type">Type</label><br/>
+<select id="rule_type" name="rule[type]">
+<%= options_for_select([['Skill','SkillRule'],['Header','HeaderRule'],['Origin','OriginRule'],['Granted Header','SkillGrantsHeaderRule']]) %>
+</select>
+<%= observe_field('rule_type', { :url => url_for( :controller => 'rules', :action => 'options' ), :update => 'correlated_window', :with => "type" } ) %>
+</p>
+
+<table width="100%"><tr>
+<td valign=top>When a character has<br>
+<div id="correlated_window">
+<%= render :partial => "rules/options", :locals => {:opts => Skill.find(:all, :order => 'name').collect {|s| [s.name,s.id]}} %>
+</div>
+</td>
+
+<td>they can buy
+<p><label for="rule_skill_id">Skill</label><br/>
+<%= select('rule', 'skill_id', Skill.find(:all, :order => 'name').collect {|s| [s.name,s.id]}) %></p>
+
+<p><label for="rule_new_cost">for New cost</label><br/>
+<%= text_field 'rule', 'new_cost', :size => 3  %></p>
+</td></tr></table>
+
+<!--[eoform:rule]-->
+

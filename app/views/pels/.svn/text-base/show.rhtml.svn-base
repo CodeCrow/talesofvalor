@@ -1,0 +1,54 @@
+<h1>PEL</h1> 
+Player: <%= link_to @pel.player.name, :action => :show, :controller => :players, :id => @pel.player.id %><br>
+<% if @attend and @attend.char %>
+Character: <%= link_to @attend.char.name, :action => :show, :controller => :chars, :id => @attend.char.id %><br>
+<% end %>
+Event: <%= link_to @pel.event.name, :action => :show, :controller => :events, :id => @pel.event.id %><br>
+Rating: <%= @pel.rating %> - <%= link_to 'Edit', :action => 'edit', :id => @pel %>
+</br>
+<p>
+
+<% if @pel.worstmoments && @pel.worstmoments != "" %>
+<b>Likes</b>
+<%= simple_format(h @pel.likes) %>
+
+<b>Dislikes</b>
+<%= simple_format(h @pel.dislikes) %>
+<hr>
+
+<b>Best Moments</b>
+<%= simple_format(h @pel.bestmoments) %>
+
+<b>Worse Moments</b>
+<%= simple_format(h @pel.worstmoments) %>
+<hr>
+
+<b>Learned</b>
+<%= simple_format(h @pel.learned) %>
+<hr>
+
+<b>Data</b>
+<%= simple_format(h @pel.data) %>
+<hr>
+
+<% else %>
+
+<b>Suggestions</b>
+<%= simple_format(h @pel.dislikes) %>
+
+<b>Event Favorites</b>
+<%= simple_format(h @pel.likes) %>
+<hr>
+
+<b>Skills or Spells Learned</b>
+<%= simple_format(h @pel.learned) %>
+<hr>
+
+<b>About the Event</b>
+<%= simple_format(h @pel.data) %>
+<hr>
+
+<b>Code of Conduct</b>
+<%= simple_format(h @pel.bestmoments) %>
+
+<% end %>

@@ -1,0 +1,57 @@
+<h1>Header List<%= @title ? ": "+@title : "" %></h1>
+
+<% if session[:staff] %>
+<div id="filterbox">
+Filter:
+<%= link_to 'All', :filter => 'all' %> |
+<%= link_to 'Normal', :filter => 'normal' %> |
+<%= link_to 'Hidden', :filter => 'hidden' %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "name" %>
+Name: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "category" %>
+Category: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "text" %>
+Description: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+</div>
+<div id="actionbox">
+<%= link_to 'Previous page', { :page => @header_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @header_pages.current.previous %><br>
+<%= link_to 'Next page', { :page => @header_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @header_pages.current.next %> <br>
+<%= session[:admin] ? link_to('New header', :action => 'new') : "" %>
+</div>
+<div id="gameinfo">
+<% end %>
+<table class="gitable">
+  <tr><th>Name</th><th>Description</th></tr>
+
+<% lastCat = "" %>
+<% for header in @headers %>
+<%  if lastCat != header.category %>
+<tr><td colspan=4><b><%= header.category %>s</b></td></tr>
+<%    lastCat = header.category %>
+<%  end %>
+  <tr>
+    <td valign=top><%= link_to header.name, :action => 'show', :id => header %></td>
+    <td><%=h header.description %></td>
+<% if session[:admin] %>
+    <td valign=top><%= link_to 'Edit', :action => 'edit', :id => header %></td>
+    <td valign=top><%= link_to 'Destroy', { :action => 'destroy', :id => header }, :confirm => 'Are you sure?', :method => :post %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+<% if session[:staff] %>
+</div>
+<% end %>
+
+<br />
+
+

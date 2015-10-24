@@ -1,0 +1,28 @@
+<%= error_messages_for 'event' %>
+
+<!--[form:event]-->
+<p><label for="event_name">Name</label><br/>
+<%= text_field 'event', 'name'  %></p>
+
+<p><label for="event_date">Date</label><br/>
+<%= datetime_select 'event', 'date'  %></p>
+
+<p><label for="event_pel_by">Pel by</label><br/>
+<%= datetime_select 'event', 'pel_by'  %></p>
+
+<p><label for="event_bgs_by">Bgs by</label><br/>
+<%= datetime_select 'event', 'bgs_by'  %></p>
+
+<p><label for="event_oog_p">Oog p</label><br/>
+<select id="event_oog_p" name="event[oog_p]"><option value="false" <%= !@event.oog_p ? "selected" : "" %>>False</option><option value="true" <%= @event.oog_p ? "selected" : "" %>>True</option></select></p>
+
+<p><label for="event_bgs_p">Bgs p</label><br/>
+<select id="event_bgs_p" name="event[bgs_p]"><option value="false" <%= !@event.bgs_p ? "selected" : "" %>>False</option><option value="true" <%= @event.bgs_p ? "selected" : "" %>>True</option></select></p>
+
+<p><label for="event_notes">Notes</label><br/>
+<%= text_area 'event', 'notes'  %></p>
+
+<p><label for="event_summary">Summary</label><br/>
+<%= text_area 'event', 'summary'  %></p>
+<!--[eoform:event]-->
+

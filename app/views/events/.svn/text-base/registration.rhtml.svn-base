@@ -1,0 +1,105 @@
+<h1>Registration Listing</h1>
+<p>Only multi event passes are available until early March. At that time single event registions will begin to become available.</p>
+<h3>2015 Announcements</h3>
+<p>Greetings ladies and gentlemen of Tales of Valor!<br />
+We are pleased to announce that the Year pass for Tales of Valor is now on Sale!. 
+<br />
+Spring passes will be going on sale as we progress to the spring season, and then single event registration will be forthcoming as well.
+<br />
+Thank you, and if you have any concerns please do not hesitate to contact me directly!</p>
+<p>2015 Event Dates
+<br />
+May 1st-3rd
+<br />
+June 5th-7th
+<br />
+August 21st-23rd
+<br />
+October 16th-18th
+</p>
+<table padding="5" align="center" width="75%">
+<tr>
+	<td colsap="3"><h2>Tales of Valor 2015 Event Registration</h2></td>
+</tr>
+<tr><td colspan="3"><hr /></tr>
+<tr>
+	<td colspan="2"><h3>2015 Full Year Pass!</h3></td>
+	<td><h3>Meal Plan Purchase</h3></td>
+</tr>
+<tr>
+	<td colspan="2">
+<p>2015 Full Year Passes have Sold Out!</p>
+	</td>
+	<td>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
+target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="W2B7YFEYW3FC4">
+<table>
+<tr><td><input type="hidden" name="on0" value="Meal Plan">Meal
+Plan</td></tr><tr><td><select name="os0">
+    <option value="MP for One">MP for One $20.00 USD</option>
+    <option value="For Two">For Two $40.00 USD</option>
+</select> </td></tr>
+<tr><td><input type="hidden" name="on1" value="Meal Plan">Meal
+Plan</td></tr><tr><td><select name="os1">
+    <option value="Normal Meal">Normal Meal </option>
+    <option value="Vegetarian">Vegetarian </option>
+</select> </td></tr>
+<tr><td><input type="hidden" name="on2"
+value="Allergies">Allergies</td></tr><tr><td><input type="text"
+name="os2" maxlength="200"></td></tr>
+</table>
+<input type="hidden" name="currency_code" value="USD">
+<input type="image"
+src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif"
+border="0" name="submit" alt="PayPal - The safer, easier way to pay
+online!">
+<img alt="" border="0"
+src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1"
+height="1">
+</form>	
+		
+	</td>
+</tr>
+<tr>
+	<td colspan="3"><hr /></td>
+</tr>
+<tr>
+	<td><h2>Spring Season Pass!</h2></td>
+	<td><h2>Spring Event 1 Single Event!</h2></td>
+	<td><h2>Spring Event 2 Single Event!</h2></td>
+</tr>
+<tr>
+	<td><p>Spring Season Passes are Coming Soon</p></td>
+	<td><p>Spring Event 1 Single Event Passes are Coming Soon!</p>
+		</td>
+	<td>
+	<p>Spring Event 2 Single Event Passes are Coming Soon!</p>
+	</td>
+</tr>
+<tr>
+	<td colspan="3"><hr /></td>
+</tr>
+<tr>
+	<td><h2>Fall Season Pass </h2></td>
+	<td><h2>Fall Event 1 Single Event </h2></td>
+	<td><h2>Fall Event 2 Single Event </h2></td>
+</tr>
+
+<tr>
+	<td>
+<p>Fall Season Passes is Coming in the Summer</p>
+	</td>
+	<td>
+		<p>Fall Event 1 Registration is Coming in the Summer!</p>
+	</td>
+	<td>
+<p>Fall Event 2 Registration is Coming in the Late Summer or Early Fall!</p>
+	</td>
+</tr>
+	
+</table>
+<br />
+<hr />
+<p>If an event is sold out please contact Sean or Erica to either be put on our waiting list or to volunteer as a staff member.  While there is no guarantee that waiting listees will be able to attend event it is often the case that someone has to cancel after registration has closed.</p>

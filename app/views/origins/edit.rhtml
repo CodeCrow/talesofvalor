@@ -1,0 +1,9 @@
+<h1>Editing origin</h1>
+
+<% form_tag :action => 'update', :id => @origin do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @origin %> |
+<%= link_to 'Back', :action => 'list' %>

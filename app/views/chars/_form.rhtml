@@ -1,0 +1,62 @@
+<%= error_messages_for 'char' %>
+
+<!--[form:char]-->
+<p><label for="char_name">Name</label><br/>
+<%= text_field 'char', 'name'  %></p>
+
+<p><%= @char.player_id ? "Player: " : "" %>
+<% if @char.player %>
+<%= link_to @char.player.name, :controller => :players, :action => :show, :id => @char.player %>
+<% end %>
+</p>
+
+<% if session[:staff] %>
+<p><label for="char_npc">Npc?</label><br/>
+<select id="char_npc" name="char[npc]"><option value="false" <%= @char.npc? ? "" : "selected" %>>False</option><option value="true" <%= @char.npc? ? "selected" : "" %>>True</option></select></p>
+<p><label for="char_npc">Picture name on server</label><br/>
+<%= text_field 'char', 'picture_url' %> (under public/images/pictures)</p>
+<% end %>
+
+<table width="100%"><tr><td>
+<p><label for="char_description">Description</label><br/>
+<%= text_area 'char', 'description', :cols => 45  %></p>
+</td><td>
+<p><label for="char_history">History</label><br/>
+<%= text_area 'char', 'history', :cols => 45  %></p>
+</td></tr></table>
+
+<% if session[:staff] %>
+<p><label for="staff_attn">Needs staff attention?</label><br/>
+<select id="staff_attn" name="char[staff_attn]"><option value="false" <%= @char.staff_attn? ? "" : "selected" %>>False</option><option value="true" <%= @char.staff_attn? ? "selected" : "" %>>True</option></select></p>
+<% end %>
+
+<% if session[:staff] %>
+<table width="100%"><tr>
+
+<td><p><label for="char_cp_spent">Cp spent</label>
+<%= text_field 'char', 'cp_spent', :size => 4  %></td>
+
+<td><p><label for="char_cp_avail">Cp avail</label>
+<%= text_field 'char', 'cp_avail', :size => 4  %></p></td>
+
+<td><p><label for="char_cp_transferred">Cp transferred</label>
+<%= text_field 'char', 'cp_transferred', :size => 4  %></p></td>
+</tr></table>
+<% end %>
+
+<table width "100%"><tr>
+
+<td colspan=2><p><label for="char_notes">Player Notes</label><br/>
+<%= text_area 'char', 'player_notes', :cols => 80 %></p></td></tr><tr>
+
+<% if session[:staff] %>
+<td><p><label for="char_notes">Visible Staff Notes</label><br/>
+<%= text_area 'char', 'visible_staff_notes'  %></p></td>
+
+<td><p><label for="char_notes">Private Staff Notes</label><br/>
+<%= text_area 'char', 'private_staff_notes'  %></p></td></tr>
+<% end %>
+
+</table>
+<!--[eoform:char]-->
+

@@ -1,0 +1,12 @@
+
+<%= render :partial => 'subnavigation' %> 
+<div id="infobox">
+<h1>An Introduction to our Game</h1>
+   <br>
+<p>Welcome to Tales of Valor. Tales of Valor is a live-action fantasy role-playing game: live-action because there are no boards or markers necessary to play the game; fantasy because the setting is a medieval world in which magic works and monsters stalk the night, and role-playing because you, the player, will play a living role in making the game come alive.</p>
+<br>
+<p>Jhoril is a world on the brink of war. Political strife in Haventhal, the destruction of Taer, and the terrible prophecies spread by the Sidhe are mere footnotes in the historical tales. New beliefs reign as folks find faith in the teachings of the Guides, seeking aid in these dark times. The Firbolg have embraced new allies in the Wastelands to help combat the growing Darkened threat.&nbsp; But the forces of darkness will not rest quietly. The Darkened&rsquo;s machinations run from the overt to the subtle and have already led to the downfall of one empire. Throughout it all the joint venture of Brightwater calls to those who seek adventure, fame, or simply to escape the staid and simple life of the civilized lands. Many tales are already told of those living there, some heroic, others cautionary. Regardless of the reason, all agree that it is a place blessed or cursed to be the center of interesting things, and a place where fame and glory or ruin and infamy can be had.</p>
+<p>Within the game you will be playing one of the residents of the Brightwater Colony. Located on the outskirts of the Waste, individuals of all talents are needed to ensure the survival of this outpost in a dangerous and unforgiving land.. Formed by the Brightwater Colony Company, Brightwater is the bridgehead of a trade route that will be carved through the wastes all the way to Caer Merenthala, the Sidhe capital. The Company has recruited men and women from all across Jhoril to live and work in this colony in an attempt to solidify the peace. For the last five years it has continued to grow, expanding from its original settlement and pushing further into the Wastelands. Despite tales of horrifying encounters with trolls, goblane, and even more unimaginable monsters that filter their way into the great cities of Jhoril, adventurers continue to flock to the Colony every year. </p>
+<p>Will you survive to become a hero? Or go down in the annals of Jhoril&rsquo;s history as a mere footnote?</p>
+<br>
+</div>

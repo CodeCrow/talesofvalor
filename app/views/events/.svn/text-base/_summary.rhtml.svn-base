@@ -1,0 +1,2 @@
+<h3>Event Summary</h3>
+<%= simple_format(h event.summary) %>

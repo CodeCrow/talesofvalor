@@ -1,0 +1,10 @@
+<h1>Login</h1>
+
+<p>Use your ToV site username and password.  If you don't have one, <a
+href="http://www.talesofvalor.com">register</a>.</p>
+
+<% form_tag(:action => 'dologin') do %>
+  <b>Username:</b> <%= text_field_tag 'login[username]', '', :size => 20 %><br/>
+  <b>Password:</b> <%= password_field_tag 'login[password]', '', :size => 20 %><br/>
+  <%= submit_tag 'Login' %>
+<% end %>

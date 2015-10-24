@@ -1,0 +1,34 @@
+<hr>
+
+<% if pel.worstmoments && pel.worstmoments != "" %>
+
+<b>Best Moments</b>
+<%= simple_format(h pel.bestmoments) %>
+
+<b>Worse Moments</b>
+<%= simple_format(h pel.worstmoments) %>
+<hr>
+
+<b>Learned</b>
+<%= simple_format(h pel.learned) %>
+<hr>
+
+<b>Data</b>
+<%= simple_format(h pel.data) %>
+<hr>
+
+<% else %>
+
+<b>Skills or Spells Learned</b>
+<%= simple_format(h pel.learned) %>
+<hr>
+
+<b>About the Event</b>
+<%= simple_format(h pel.data) %>
+<hr>
+
+<b>Code of Conduct</b>
+<%= simple_format(h pel.bestmoments) %>
+
+<hr>
+<% end %>

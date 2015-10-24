@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/fodder_svn/!svn/ver/648/site/trunk/app/views/pels
+END
+list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/fodder_svn/!svn/ver/583/site/trunk/app/views/pels/list.rhtml
+END
+_showrest.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/fodder_svn/!svn/ver/455/site/trunk/app/views/pels/_showrest.rhtml
+END
+_showshort.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/fodder_svn/!svn/ver/454/site/trunk/app/views/pels/_showshort.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/fodder_svn/!svn/ver/648/site/trunk/app/views/pels/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/fodder_svn/!svn/ver/454/site/trunk/app/views/pels/_form.rhtml
+END
+_comments.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/fodder_svn/!svn/ver/140/site/trunk/app/views/pels/_comments.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/fodder_svn/!svn/ver/140/site/trunk/app/views/pels/edit.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/fodder_svn/!svn/ver/140/site/trunk/app/views/pels/new.rhtml
+END

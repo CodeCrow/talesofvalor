@@ -1,0 +1,33 @@
+<%= render :partial => 'progressbar', :locals => {:char => @char } %>
+<h1>Add Background for <%= @char.name %></h1>
+
+<% for b in @char.backgrounds %>
+<b>Background</b>: <%= link_to b.name, :controller => :origins, :action => :show, :id => b.id %><br>
+<% end %>
+
+<% if @char.backgrounds.length < (@char.isfreilan() ? 2 : 1) or session[:staff] %>
+<% form_tag :action => 'doaddbackground', :id => @char do %>
+<table>
+<tr><td valign=top>
+<B>Add Background</b>:  
+<%
+  if @char.isfreilan() and @char.backgrounds.length < 1 
+  @origin = Origin.find(:first,:conditions => {:name => 'Freilan Grand Caravan'});
+  @oskills = @origin.origin_skills
+%>
+<input type=hidden id="origin_background" name="origin[background]" value="<%= @origin.id %>">
+<%= render :partial => "origins/selectvalue", :locals => { :origin => @origin, :oskills => @oskills } %>
+
+<% else %>
+<%= select('origin', 'background', @origins, {:include_blank => true }) %>
+<%= observe_field('origin_background', { :url => url_for( :controller => 'origins', :action => 'select' ), :update => 'window_origin_background', :with => "value" } ) %>
+<% end %>
+</td>
+<td>
+<div id="window_origin_background">
+</div>
+</td></tr></table>
+  <%= submit_tag 'Save and Continue' %>
+  <%= submit_tag 'Save and Exit' %>
+<% end %>
+<% end %>

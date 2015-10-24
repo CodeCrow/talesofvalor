@@ -1,0 +1,48 @@
+<%= render :partial => 'regnavigation' %>
+<h2>Event: <%= @event.name + (@event.oog_p ? " - Out of Game Event" : "") %></h2>
+<table width="100%">
+<tr>
+<td><%= @event.bgs_p ? "BGS by "+@event.bgs_by.strftime("%d %b %Y") : "No BGS" %>
+<br>
+<td><font size="+1">Date: <%= @event.date.strftime("%d %b %Y") %></font></td>
+<td>PEL by <%= @event.pel_by.strftime("%d %b %Y") %></td>
+</tr>
+</table>
+
+<h3>Notes</h3>
+<%=h @event.notes %>
+
+<% if @event.date > Time.now() %>
+<h3>Who is Coming</h3>
+<% else %>
+<h3>Attendees</h3>
+<% end %>
+<table border=3 cellspacing=0 cellpadding=1>
+
+<% if session[:user] %>
+<tr><td><% i=0 %></td><th>Player</th><th>Character</th></tr>
+<%  for p in @ppls %>
+<%   if p %>
+<tr><td><%= i=i+1 %></td><td><%= p[:player].name %></td><td><%= p[:char] ? p[:char].name : "None listed" %></td></tr>
+<%   else %>
+<tr><td><% i=0 %></td><th>Staff</th><th>Default Character</th></tr>
+<%   end %>
+<%  end %>
+
+<% else %>
+
+<tr><td><% i=0 %></td><th>Character</th></tr>
+<%  for p in @ppls %>
+<%   if p %>
+<%    if p[:char] %>
+<tr><td><%= (i=i+1) %></td><td><%= p[:char].name %></td></tr>
+<%    end %>
+<%   else %>
+<%    break %>
+<%   end %>
+<%  end %>
+<% end %>
+</table>
+
+<br><br>
+<%= link_to 'Event List', :action => 'list' %>

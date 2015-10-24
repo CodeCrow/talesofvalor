@@ -1,0 +1,74 @@
+<h1>Character List: <%= @title %></h1>
+
+<div id="actionbox">
+Actions: <%= link_to 'New Character', :action => 'new' %>
+<br>
+
+Select:
+<%= link_to 'All', { :action => :multitoggle, :select => true } %> |
+<%= link_to 'Filtered', { :action => :multitoggle, :filter => params[:filter], :filtervalue => params[:filtervalue], :select => true } %>
+<br>
+UnSelect:
+<%= link_to 'All', :action => 'cleartoggle' %> |
+<%= link_to 'Filtered', :action => :multitoggle, :filter => params[:filter], :filtervalue => params[:filtervalue] %>
+<br>
+
+Selected: <%= link_to 'Print', :action => 'printselected' %>
+<br><br><p align="center">
+<%= link_to('Previous page', { :page => @char_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue] }) if @char_pages.current.previous %>
+<%= link_to 'Next page', { :page => @char_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue]  } if @char_pages.current.next %> </p>
+
+</div>
+<div id="filterbox">
+Filter:
+<%= link_to 'All', :filter => 'all' %> |
+<%= link_to 'PCs', :filter => 'pc' %> |
+<%= link_to 'NPCs', :filter => 'npc' %> |
+<%= link_to 'NeedAttn', :filter => 'attn' %> |
+<%= link_to 'Selected', :filter => 'selected' %>
+
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "name" %>
+Name: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "origin" %>
+Origin: <%= select_tag 'filtervalue', options_for_select(Origin.find(:all, :order => "type,name").collect {|o| [o.name,o.id]},'') %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "header" %>
+Header: <%= select_tag 'filtervalue', options_for_select(Header.find(:all, :order => "name").collect {|h| [h.name,h.id]},'') %>
+<%= submit_tag 'Search' %>
+<% end %>
+<% form_tag({:action => 'list'}, :method => "get") do %>
+<%= hidden_field_tag "filter", "skill" %>
+Skill: <%= text_field_tag 'filtervalue', '', :size => 10 %>
+<%= submit_tag 'Search' %>
+<% end %>
+</div>
+
+<div id="charlisting">
+<table id="chlist">
+  <tr><td>Sel?</td><th align=left width="300px">Name</th><!--<th>Tag</th>--><th>Actions</th></tr>
+  
+<% for char in @chars %>
+  <tr>
+    <td><div id="toggle_<%= char.id %>"><%= render :partial => "chars/toggle", :locals => {:char => char} %></div></td>
+    <td><%= link_to char.name, :action => 'show', :id => char %></td>
+<!--    <td><%= render :partial => "tags/tagspot", :locals => {:id => char.id, :type => "CharTag", :tags => @tags} %></td> -->
+    <td width="50%" align=left><%= render :partial => "chars/actions", :locals => {:char => char} %></td>
+  </tr>
+  <tr class="bottom">
+  <td colspan="3"><%= render :partial => "tags/tagspot", :locals => {:id => char.id, :type => "CharTag", :tags => @tags} %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<div id="bottompagemover">
+<%= link_to 'Previous page', { :page => @char_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue]  } if @char_pages.current.previous %>
+<%= link_to 'Next page', { :page => @char_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue]  } if @char_pages.current.next %> 
+</div>
+<br />

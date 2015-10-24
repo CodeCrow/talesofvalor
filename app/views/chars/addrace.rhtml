@@ -1,0 +1,20 @@
+<%= render :partial => 'progressbar', :locals => {:char => @char } %>
+<h1>Add Race for <%= @char.name %></h1>
+<% for r in @char.races %>
+<b>Race</b>: <%= link_to r.name, :controller => :origins, :action => :show, :id => r.id %><br>
+<% end %>
+
+<% if @char.races.empty? or session[:staff] %>
+<% form_tag :action => 'doaddrace', :id => @char do %>
+<table><tr><td valign=top width="200">
+<b>Add Race</b>:  <%= select('origin', 'race', @origins, {:include_blank => true }) %>
+<%= observe_field('origin_race', { :url => url_for( :controller => 'origins', :action => 'select' ), :update => 'window_origin_race', :with => "value" } ) %>
+</td>
+<td>
+<div id="window_origin_race">
+</div>
+</td></tr></table>
+  <%= submit_tag 'Save and Continue' %>
+  <%= submit_tag 'Save and Exit' %>
+<% end %>
+<% end %>

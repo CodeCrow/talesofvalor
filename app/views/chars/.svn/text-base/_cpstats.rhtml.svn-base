@@ -1,0 +1,1 @@
+<b>CP Available: <%= char.cp_avail %></b> | <b>CP Spent: <%= char.cp_spent %></b> | <b>CP Total: <%= @char.cp_avail+@char.cp_spent %></b> | <b>Point Cap: <%= char.cp_transferred %>/20</b>

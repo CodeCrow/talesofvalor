@@ -1,0 +1,12 @@
+<div id="header_<%= h.id %>">
+<font size="+1"><b><%= link_to h.name, :controller => 'headers', :action => 'show', :id => h %></b></font><ul>
+Free Sigil of the Spheres (pick one)<p>
+<% for sk in Skill.find(:all, :conditions => "tag = 'sigilspheres'") %>
+<%= link_to_remote(sk.name, :url => { :controller => 'chars', :action => 'freesigil', :id => cid, :sid => sk.id, :header => h.id }, :update => ('header_'+h.id.to_s), :success => visual_effect(:highlight, "header_"+h.id.to_s, :duration => 2)) %><br/>
+<% end %>
+
+
+
+</ul>
+</div>
+

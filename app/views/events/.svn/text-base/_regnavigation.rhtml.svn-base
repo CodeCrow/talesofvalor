@@ -1,0 +1,3 @@
+<div class="filterbox">
+<%= link_to "Event Registration", :controller => :events, :action => :registration %> 
+</div>

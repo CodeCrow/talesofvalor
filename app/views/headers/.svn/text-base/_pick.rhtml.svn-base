@@ -1,0 +1,14 @@
+<div id="header_<%= h.id %>">
+
+<font size="+1"><b><%= link_to h.name, :controller => 'headers', :action => 'show', :id => h %></b></font><% if session[:staff] %> (
+ <%= link_to_remote("Remove", :update => ('header_' + h.id.to_s), :url => { :action => :remove_header, :id => char, :header => h.id},
+	:success => visual_effect(:highlight, "header_"+h.id.to_s, :duration => 2) + remote_function(:update => "cpstats", :url => { :action => :cpstats, :id => char }, :complete => visual_effect(:highlight, "cpstats", :duration => 2)+' removehandlers(document.skills)')) %> )<% end %>
+<ul>
+<% if sbyh[h.id] %>
+<% for skh in sbyh[h.id] %>
+<li><%= render :partial => "skills/pick", :locals => {:skill => skh.skill, :cskills => cskills, :cskillsleft => cskillsleft, :costs => costs} %></li>
+<% end %>
+<% end %>
+</ul>
+</div>
+

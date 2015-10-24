@@ -1,0 +1,7 @@
+<%= link_to_remote image_tag("tag.gif", :border => 0), :url => {:controller => :tags, :action => :showtagger, :id => id, :type => type}, :update => "tag#{id}" %>
+<% if not tags
+    tags = { id => Tag.find(:all, :conditions => {:foreign_id => id, :type => type}).collect {|t| t.tag} }
+   elsif not tags[id]
+    tags[id] = []
+   end %>
+<%= (tags[id].collect {|t| link_to t, :controller => :tags, :action => :show, :tag => t }).join(", ") %>

@@ -1,0 +1,31 @@
+<b>Question</b>:
+<% if searchstring %>
+<%= highlight(simple_format(h bgs.question), searchstring) %>
+<% else %>
+<%= simple_format(h bgs.question) %>
+<% end %>
+<b>Answer</b>: 
+<% if not bgs.answer.empty? %>
+(on <%= bgs.answer_date.strftime("%d %b %Y") %>)
+<% end %>
+<% if assignto %>
+<% form_remote_tag(:url => {:action => 'assignto', :id => bgs.id}, :update => "bgs_#{bgs.id}_qanda", :success => remote_function(:update => "bgs_#{bgs.id}_assignee", :url => { :action => :assignee, :id => bgs.id })) do %>
+<%= select_tag 'answering_player', options_for_select(options) %>
+<%= submit_tag 'Assign' %>
+<% end %>
+<% else %>
+<%= link_to_remote("Assign", :update => "bgs_#{bgs.id}_qanda", :url => { :action => :expand, :id => bgs, :assignto => :true }) %>
+<% end %>
+<% if answerbox %>
+<% form_remote_tag(:url => {:action => 'submitanswer', :id => bgs.id}, :update => "bgs_#{bgs.id}_qanda") do %>
+<%= text_area_tag 'answer', bgs.answer, :cols => 50, :rows => 10 %><br>
+<%= submit_tag 'Submit'%>
+<% end %>
+<% else %>
+<%= link_to_remote((bgs.answer.empty? ? "Add" : "Change")+" Answer", :update => "bgs_#{bgs.id}_qanda", :url => { :action => :expand, :id => bgs, :answerbox => :true }) %>
+<% if searchstring %>
+<%= highlight(simple_format(h bgs.answer), searchstring) %>
+<% else %>
+<%= simple_format(h bgs.answer) %>
+<% end %>
+<% end %>

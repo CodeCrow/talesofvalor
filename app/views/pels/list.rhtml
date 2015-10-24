@@ -1,0 +1,85 @@
+<h1>Listing PELs for <%= @event.name %></h1>
+
+<div id="filterbox">
+<% form_tag({:action => 'list'}, :method => "get", :name => "filter") do %>
+Select Event: <%= select_tag 'event_id', options_for_select(Event.find(:all, :order => "date").collect {|e| [e.name,e.id]},@event.id), :onChange => "filter.submit();" %><br>
+Order by: <%= select_tag 'orderby', options_for_select([["Player name", "pname"], ["PC/NPC","npc"], ["Submit time","time"], ["Rating","rating"]], params[:orderby] ? params[:orderby] : "time"), :onChange => "filter.submit();" %><br>
+<%= text_field_tag 'searchstring', params[:searchstring] %>
+<%= submit_tag "Search" %>
+<% end %>
+</div>
+
+<div id="actionbox">
+Event: <%= link_to @event.name, :action => :show, :controller => :events, :id => @event.id %><br>
+
+</div>
+
+<!-- Old Pel Content Display
+<div id="charlisting">
+<table width="100%">
+<tr><th width="20%">Player</th><th>PEL</th></tr>
+<tr><td valign="top">
+<%- sum=0.0
+   for pel in @pels
+     sum += pel.rating
+     if @attend[pel.player.id] and @attend[pel.player.id].char
+       char = @attend[pel.player.id].char
+     else
+       char = false
+     end 
+-%>
+<div id="pel_<%= pel.id %>_name">
+<%= link_to_remote( pel.player.name, :update => "showpane", :url => {:action => "showshort", :id => pel.id}, :success => remote_function(:update => "pel_%{pel.id}_name", :url=> {:action => :linkback}) ) %>&nbsp;<%= image_tag(pel.player.acl == "Player" ? "pc.gif" : "npc.gif", :title => (char ? char.name : "")) %>
+<% if @peld[pel.id] %><br>
+&nbsp;&nbsp;<%= @peld[pel.id][:count] %> comments
+<% end %>
+</div>
+<% end %>
+</td>
+<td valign="top">
+<div id="showpane">
+Average Rating: <%= sum / @pels.size if @pels.size > 0 %>
+</div>
+</td></tr>
+</table>
+
+</div>
+-->
+
+<!-- New Pel Content Display -->
+<div id="charlisting">
+<table width="100%">
+<tr>
+<td valign="top" colspan="2">
+<div class="pelul">
+<ul>
+<%- sum=0.0
+   for pel in @pels
+     sum += pel.rating
+     if @attend[pel.player.id] and @attend[pel.player.id].char
+       char = @attend[pel.player.id].char
+     else
+       char = false
+     end 
+-%>
+<div id="pel_<%= pel.id %>_name">
+<li><%= link_to_remote( pel.player.name, :update => "showpane", :url => {:action => "showshort", :id => pel.id}, :success => remote_function(:update => "pel_%{pel.id}_name", :url=> {:action => :linkback}) ) %>&nbsp;<%= image_tag(pel.player.acl == "Player" ? "pc.gif" : "npc.gif", :title => (char ? char.name : "")) %>
+<% if @peld[pel.id] %>
+&nbsp;&nbsp;<%= @peld[pel.id][:count] %> Notes</li>
+<% end %>
+</div>
+<% end %>
+</ul></div>
+</td></tr>
+<tr>
+<td valign="top" colspan="2">
+<div id="showpane">
+
+</div>
+</td></tr>
+</table>
+
+Average Rating: <%= sum / @pels.size if @pels.size > 0 %>
+</div>
+
+<br />
