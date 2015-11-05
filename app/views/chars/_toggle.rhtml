@@ -1,2 +1,0 @@
-<%= link_to_remote "<img src=\"/images/#{session[:chars].include?(char) ? "newselected" : "newunselected"}.gif\" border=0>",
-	:update => ('toggle_' + char.id.to_s), :url => { :action => :toggle, :id => char} %>

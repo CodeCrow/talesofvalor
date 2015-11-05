@@ -1,0 +1,333 @@
+/* Tales of Valor CSS Created 2009 by Larry Joyce */
+/* CSS formatting for Wide theme */
+
+/* Div Control */
+#page {
+	background-color:#003;
+ 	background-image:url(img/paper017.jpg);
+	width: 1000px;
+	margin: 0 auto;
+	border: 5px solid #000;
+}
+#tip_top {height:25px;
+}
+#tt_right {
+	float:right;
+	width:150px;
+	}
+#tt_left {
+	float:left;
+	width:6000px;
+	}
+#top {
+	height:150px;
+}
+.header {
+	float: left;
+	width: 650px;
+	background: url(img/header2.jpg) no-repeat;
+	font:2.4em;
+	line-height: 150px;
+	text-align: center;
+	margin-left:5px;
+}
+
+#actionbox {
+	float:right;
+	border:#5E5E5E dashed 2px;
+	width:250px;
+	height:125px;
+	padding:1px;
+	margin-right:25px;
+		-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#filterbox {
+	float:left;
+	border:#5E5E5E dashed 2px;
+	width:425px;
+	height:125px;
+	padding:1px;
+		-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#picturebox {
+	width:200px;
+	float:right;
+	padding:5px;
+		-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#afbox {
+	width:720px;
+}
+.center {
+	width:850px;
+	padding-left:25px;
+	float:left;
+	margin-top:1px;
+	background-image:url(img/paper_background.png);
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+/* Login Section */
+.login {
+	background-image:url(img/paper_background.png);
+	width: 300px;
+	float:right;
+	border:#5E5E5E dashed 2px;
+	padding:1em;
+	margin-right:5px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+
+/* Center Top Menu Bar */
+#menu {
+	width: 1000px;
+	height: 40px;
+	margin: 0 auto;
+}
+
+
+/* Left Menu Structure */
+.menuleft {
+	width:110px;
+	float:left;
+	padding-left:1px;
+	-moz-border-radius-bottomright: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+}
+
+
+/* Event Section */
+#eventinfo{
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+#eventwindow {
+	width:775px;
+	float:left;
+	border:#5E5E5E dotted 2px;
+	padding:1em;
+	margin-top:2px;
+	margin-bottom:2px;
+}
+#eventctrl {
+	width:775px;
+	border:none;
+}
+
+
+/* Character & Player Sections */
+#charlisting {
+	width:775px;
+	float:left;
+	margin-top:2px;
+	border:#666 dashed 2px;
+}
+#chevents{
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+#eventreg{
+		width:775px;
+		margin-left:50px;
+		background-image:url(img/img01.jpg);
+		border:#666 dashed 2px;
+}
+#playerlog{
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+/* Character Display */
+#chartop {
+		float:left;
+		width:775px;
+}
+#chphoto {
+		width:200px;
+		float:right;
+		margin-right:10px;
+}
+#charmain {
+		float:left;
+		width:775px;
+		margin-top:2px;
+}
+.charul{
+	width:775px;
+	float:left;
+	margin-top:2px;
+	margin-left:50px;
+}
+
+/* Info Section */
+#wacp {
+	width:775px;
+	float:left;
+	margin-top:1px;
+	padding-left:10px;
+	padding-right:30px;
+}
+#newplayer {
+	width:775px;
+	float:left;
+	margin-top:1px;
+	padding-left:10px;
+	padding-right:30px;
+}
+#vetlarp {
+	width:775px;
+	float:left;
+	margin-top:1px;
+	padding-left:10px;
+	padding-right:30px;
+}
+#infobox {
+	width:775px;
+	float:left;
+	margin-top:1px;
+	padding-left:10px;
+	padding-right:30px;
+}
+
+
+/* Game Information Section */
+#gameinfo {
+	width:775px;
+	float:left;
+	margin-top:1px;
+}
+
+
+/* Tag Section */
+#tagshow {
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+#taglist{
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+#tagleft {
+	width:300px;
+	float:left;
+	margin-top:2px;
+}
+#tagright {
+	width:300px;
+	float:left;
+	margin-top:2px;
+	margin-left:25px;
+}
+#tagmain {
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+.tagul{
+	width:775px;
+	float:left;
+	margin-top:2px;
+	margin-left:50px;
+}
+#tagcenter {
+	width:775px;
+	float:left;
+}
+
+/* Skill Section */
+#skillshow {
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+#skilltree{
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+.treeopen {
+	width:775px;
+	float:left;
+	margin-top:2px;
+	padding-left:10px;
+}
+
+.treeopen ul {
+	float:left;
+	width:50em;
+	margin:0;
+	padding:0;
+	list-style:none;
+	margin-bottom:10px;
+}
+.treeopen li {
+	float:left;
+	width:25em;
+	margin:0;
+	padding:0;
+}
+
+.treeul{
+	width:775px;
+	float:left;
+	margin-top:2px;
+	padding-left:10px;
+	}
+
+.treeul ul {
+	float:left;
+	width:775px;
+	margin:0;
+	margin-bottom:10px;
+	padding:0;
+	list-style:none;
+}
+.treeul li {
+	float:left;
+	width:280px;
+	margin:0;
+	padding:0;
+	font-size:0.9em;
+}
+/* Player's Guide Section */
+#pguide {
+	width:775px;
+	float:left;
+	margin-top:2px;
+}
+
+/*PELs Section Formating */
+.pelul{
+	width:775px;
+	float:left;
+	margin-top:2px;
+	padding-left:5px;
+	}
+
+.pelul ul {
+	float:left;
+	width:775px;
+	margin:0;
+	margin-bottom:10px;
+	padding:0;
+	list-style:none;
+	border-bottom-color:#003;
+	border-bottom-style:dashed;
+	border-bottom-width:1px;
+}
+.pelul li {
+	float:left;
+	width:250px;
+	margin:0;
+	padding-bottom:2px;
+	font-size:0.9em;
+}

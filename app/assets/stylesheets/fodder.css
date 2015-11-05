@@ -1,0 +1,366 @@
+/* Tales of Valor CSS Created 2009 by Larry Joyce */
+/* Common CSS items between themes */
+
+/* Typography */
+a {
+	text-decoration:none;
+	color:#600;
+	font-weight:bold;
+	}
+a:hover {color:#00F; background-color:#999;}
+p, ul {
+	padding-bottom: 1em;
+}
+ul {
+	margin-left: 1.2em;
+}
+
+/* .bgsheader{border:#333 1px solid;} */
+
+.bgsquest{background-color:#CCC;}
+
+.bgsdiv {float:left; width:95%;}
+
+li {
+	list-style: none;
+}
+
+
+h1 {
+	font-size: 1.8em;
+	color: #000;
+}
+h2 {font-size:1.2em;
+}
+h3 {font-size:0.8em;
+}
+* {
+	margin: 0;
+	padding: 1;
+}
+
+/* Body Background Settings */
+body {
+	color:#006;
+	background:#FF9 url(img/dgrey003.jpg) repeat fixed;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:1em;
+	margin: .5% 0;
+	background-color:#333;
+}
+
+/* login section */
+.login ul {
+	margin: 0;
+	padding: 0;
+}
+.playerbox {
+	float:right;
+	border:#5E5E5E dashed 2px;
+	width:100%;
+	padding:1em;
+}
+#ltable {width:100%;
+border:none;
+}
+/* Center Top Menu Bar */
+
+#menu ul {
+	margin: 0;
+	padding-left: 50px;
+	list-style: none;
+	padding-top:1px;
+}
+
+#menu li {
+	display: inline;
+}
+
+#menu a {
+	display: block;
+	float: left;
+	padding: 0px 7px 0px 7px; 
+	text-decoration:none;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	font-weight:bold;
+	color:#600;
+}
+
+#menu a:hover {
+	background:#999;
+	color:#600;
+}
+
+#menu .active a {
+	color:#0FF;
+}
+
+/* Left Menu Structure */
+.menuleft h3 {
+	color:#000;
+	font-size:1.1em;
+	line-height: 24px;
+	padding-left: 2px;
+}
+.menuleft ul {
+	margin: 0;
+	padding: 0;
+}
+.menuleft li {
+	list-style: none;
+}
+.menuleft li a {
+	color:#600;
+	display: block;
+	padding: 8px 0 8px 12px;
+	width: 98px;
+	text-decoration: none;
+	text-transform:uppercase;
+	font-size:0.7em;
+	font-weight:bold;
+}
+.menuleft li a:hover {
+	background:#999;
+	color: #600;
+	padding: 8px 0 8px 12px;
+
+}
+.menuleft p {
+	color:#000;
+	font-size: .8em;
+	padding-left: 3px;
+	padding-bottom: 0px;
+	
+}
+
+/* Event Section */
+.eventheader {
+	background-color:#ddd;
+	border-collapse: separate;
+	border-spacing: 1em 0.5em;
+}
+.eventmenu {
+	background-color:ddd;
+	border-collapse: separate;
+	border-spacing: 1em 0.5em;
+}
+.eventmenu td {
+	border:thin 1px #333;
+}
+.eventmenu td a {
+	color:#900;
+	text-decoration: none;
+}
+.eventlist {
+	border-spacing: 1em 0.5em;
+	border-collapse:collapse;
+}
+.eventlist td {
+	border-bottom:1px dashed;
+	border-bottom-color:#666;
+	padding-top: 10px;
+}
+.eventlist th {
+	border-bottom:1px dashed;
+	border-bottom-color:#666;
+	padding-top:25px;
+	text-align:left;
+}
+/* BGS Tables */
+.evbgstable {
+/*	background-color:#D2D2D2; */
+}
+.evbgstable td {
+	border-bottom:1px dashed #666;
+}
+.evbgstable th {
+/*	background-color:#69F; */
+}
+.evbgstd {
+	background-color:#D2D2D2;
+}
+/* Character Section */
+.charul ul {
+	float:left;
+	width:50em;
+	margin:0;
+	padding:0;
+	list-style:none;
+	border-bottom-color:#600;
+	border-bottom-style:dashed;
+	border-bottom-width:1px;
+}
+.charul li {
+	float:left;
+	width:25em;
+	margin:0;
+	padding:0;
+}
+.skillheader {
+	font-size:1.5em;
+	font-weight:bold;
+	font-style:italic;
+}
+
+.chartable {
+	background-color:#D2D2D2;
+}
+.chartable td {
+	border-bottom:1px dashed #666;
+}
+.chartable th {
+/*	background-color:#69F; */
+}
+.characttd {
+	background-color:#D2D2D2;
+}
+#chlist {
+	width:95%;
+}
+#playerlist {
+	width:95%;
+}
+.bottom {
+	background-color:#999;
+}
+
+/* Game Info */
+.gitable {
+/*	background-color:#CCC; */
+}
+.gitable td {
+	padding:0;
+	border-bottom:1px dashed #666;
+/*	background-color:#CCC; */
+}
+.gitable th {font-size:1.2em;
+/* background-color:#CCC; */
+/*	background-color:#69F; */
+}
+
+/* Players Guide Section */
+.pgtable {
+	background-color:#D2D2D2;
+}
+.pgtable td {
+	border-bottom:1px dashed #666;
+}
+.pgtable th {
+/*	background-color:#69F; */
+}
+.pgtd {
+	background-color:#D2D2D2;
+}
+
+/* Tags Section */
+.tagul ul {
+	float:left;
+	width:50em;
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+.tagul li {
+	float:left;
+	width:25em;
+	margin:0;
+	padding:0;
+}
+
+/* Misc */
+.instruction {
+	font-size:110%;
+	font-weight:bold;
+	color:#cc3030;
+	}
+
+.highlight {
+	color:#ffff99
+}
+
+.tagspot {
+	border:#000 1px dashed
+	}
+	
+#showpane {
+	border: 1px solid #5c0909;
+	padding: 5px;
+	background-color: #eeeeee;
+}
+td.special {
+	border: inset 1px;
+	background-color: #eeeeee;
+}
+td.specialnpc {
+	border: inset 1px;
+	background-color: #ffdddd;
+}
+pre {
+	background-color: #eee;
+	padding: 10px;
+	font-size: 11px;
+}
+.fieldWithErrors {
+	padding: 2px;
+	background-color: red;
+	display: table;
+}
+#errorExplanation {
+	width: 400px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 12px;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
+}
+#errorExplanation h2 {
+	text-align: left;
+	font-weight: bold;
+	padding: 5px 5px 5px 15px;
+	font-size: 12px;
+	margin: -7px;
+	background-color: #c00;
+	color: #fff;
+}
+#errorExplanation p {
+	color: #333;
+	margin-bottom: 0;
+	padding: 5px;
+}
+#errorExplanation ul li {
+	font-size: 12px;
+	list-style: square;
+}
+div.uploadStatus {
+	margin: 5px;
+}
+
+div.progressBar {
+	margin: 5px;
+}
+div.progressBar div.border {
+	background-color: #fff;
+	border: 1px solid grey;
+	width: 100%;
+}
+div.progressBar div.background {
+	background-color: #333;
+	height: 18px;
+	width: 0%;
+}
+	
+/* footer */
+#bottompagemover{clear:both;
+}
+.footer {
+	clear: both;
+	margin: 0;
+	padding: 2px;
+}
+#flash {
+	color:#09F;
+	font-style:italic;
+	font-size:12px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+}

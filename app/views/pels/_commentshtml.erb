@@ -1,0 +1,19 @@
+<% if not comments.empty? %>
+<b>Comments:</b> (<%= link_to 'Refresh', :update => "pel_#{pel.id}_comments", :url => { :action => :comments, :id => pel.id } %>)<br>
+<%  for bc in comments %>
+<%= link_to bc.player.name, :action => :show, :controller => :players, :id => bc.player.id %>
+on <%= bc.submit_date.strftime("%d %b %Y") %>:
+(<%= link_to("Delete", :update => "pel_#{pel.id}_comments", :url => { :action => :deletecomment, :id => pel, :commentid => bc.id }) %>)
+<%= simple_format(h bc.comment) %></li>
+<%  end %>
+<% else %>
+<b>No comments</b> (<%= link_to 'Refresh', :update => "pel_#{pel.id}_comments", :url => { :action => :comments, :id => pel.id } %>)<br>
+<% end %>
+<% if addcomment %>
+<% form_remote_tag(:url => {:action => 'postcomment', :id => pel.id}, :update => "pel_#{pel.id}_comments") do %>
+<%= text_area_tag 'comment', '', :cols => 30, :rows => 6 %><br>
+<%= submit_tag 'Post'%>
+<% end %>
+<% else %>
+<%= link_to 'Add Comment', :update => "pel_#{pel.id}_comments", :url => { :action => :comments, :id => pel.id, :addcomment => :true } %>
+<% end %>
