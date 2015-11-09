@@ -6,17 +6,14 @@ class OriginsController < ApplicationController
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  verify :session => :admin, :except => [:index, :list, :select, :show], :redirect_to => {:action => :list}, :add_flash => {:notice => "Only Site Administrators may edit origins"}
-
   def list
     if session[:staff]
-      @origin_pages, @origins = paginate :origins, :per_page => 20, :order => 'type,name'
+      @origins = Origin.find(:order => 'type,name')
+      @origins = @origins.paginate(page: params[:page], per_page: 30)
     else
-      @origin_pages, @origins = paginate :origins, :per_page => 20, :order => 'type,name', :conditions => "hidden = 0"
+      @origins = Origin.where('hidden = 0', :order => 'type,name')
+      @origins = @origins.paginate(:page => params[:page], :per_page => 30)
+      #@origin_pages, @origins = paginate :origins, :per_page => 20, :order => 'type,name', :conditions => "hidden = 0"
     end
   end
 

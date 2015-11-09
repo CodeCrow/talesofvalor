@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
@@ -69,6 +70,7 @@ module ActiveRecord
 end
 
 class ApplicationController < ActionController::Base
+
     def paginate_by_sql(model, sql, per_page, options={})
        if options[:count]
            if options[:count].is_a? Integer

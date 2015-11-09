@@ -3,11 +3,11 @@ class Event < ActiveRecord::Base
   has_many :attendances
 
   def self.next()
-    return self.find(:first, :conditions => ["date > now()"], :order => "date asc")
+    return self.where(['date > ?', DateTime.now]).order(date: :asc).first
   end
 
   def self.last()
-    return self.find(:first, :conditions => ["date < now()"], :order => "date desc")
+    return self.where(['date < ?', DateTime.now]).order(date: :desc).first
   end
 
   def future?

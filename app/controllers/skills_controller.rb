@@ -1,5 +1,3 @@
-require 'pdf/writer'
-
 class SkillsController < ApplicationController
   def index
     list
@@ -132,27 +130,4 @@ class SkillsController < ApplicationController
     redirect_to :action => 'show', :id => @skill
   end
 
-  def print
-    @skill = Skill.find(params[:id])
-    @skheaders = @skill.skill_headers
-    if session[:user]
-      if !session[:staff] && !session[:avail][:skills][@skill.id]
-        flash[:notice] = "Unable to view that skill"
-        redirect_to :controller => 'players', :action => "show", :id => session[:user]
-      end
-    else
-      if !@skheaders.collect {|skh| (skh.header_id = 0 || skh.header.hidden = 0) ? skh : nil}.compact
-        flash[:notice] = "Unable to view that skill"
-        redirect_to :action => "list"
-      end
-    end
-    
-    _p = PDF::Writer.new :orientation => :landscape
-    _p.select_font 'Times-Roman'
-    #_p.start_columns
-
-    @skill.write_to_pdf(_p,nil)
-    
-    send_data _p.render, :filename => @skill.name+'.pdf', :type => "application/pdf"
-  end
 end

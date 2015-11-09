@@ -6,12 +6,6 @@ class PlayersController < ApplicationController
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  verify :session => :user, :except => [:welcome, :new, :create, :login, :dologin], :redirect_to => "/", :add_flash => {:notice => "Must be logged in"}  
-
   def welcome
     @event = Event.next()
 
