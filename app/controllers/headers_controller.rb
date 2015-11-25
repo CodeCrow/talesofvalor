@@ -1,43 +1,45 @@
-require 'pdf/writer'
-
 class HeadersController < ApplicationController
   def index
     list
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  verify :session => :admin, :except => [:index, :list, :show], :redirect_to => {:action => :list}, :add_flash => {:notice => "Only Site Administrators can edit headers"}
-
   def list
     perpage = 15
     if session[:staff]
       filter = params[:filter] ? params[:filter] : 'all'
+      params['page'] = params['page'] ? params['page'] : 1
       if filter == 'normal'
         @title = "Normal"
-        @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name', :conditions => "hidden = 0"
+        @headers = Header.where("hidden = 0", :order => 'category, name')
+        @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
       elsif filter == 'hidden'
         @title = "Hidden"
-        @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name', :conditions => "hidden = 1"
+        @headers = Header.where("hidden = 1", :order => 'category, name')
+        @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
       elsif filter == 'name'
         @title = "Name like #{params[:filtervalue]}"
-        @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name', :conditions => ["name like ?","%"+params[:filtervalue]+"%"]
+        @headers = Header.where(["name like ?","%"+params[:filtervalue]+"%"], :order => 'category, name')
+        @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
       elsif filter == 'text'
         @title = "Text includes #{params[:filtervalue]}"
-        @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name', :conditions => ["description like ?","%"+params[:filtervalue]+"%"]
+        @headers = Header.where(["description like ?","%"+params[:filtervalue]+"%"], :order => 'category, name')
+        @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
       elsif filter == 'category'
+        @headers = Header.where(["category like ?","%"+params[:filtervalue]+"%"], :order => 'category, name')
+        @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
         @title = "Category like #{params[:filtervalue]}"
-        @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name', :conditions => ["category like ?","%"+params[:filtervalue]+"%"]
       else
-        @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name'
+        @headers = Header.where(:order => 'category, name')
+        @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
       end
     elsif !session[:user]
-      @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name', :conditions => "hidden = 0"
+      @headers = Header.where('hidden=0', :order => 'category, name')
+      @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
+
     else
-      @header_pages, @headers = paginate :headers, :per_page => perpage, :order => 'category,name', :conditions => "id in (#{session[:avail][:headers].keys.join(",")})"
+      @headers = Header.where('id in (#{session[:avail][:headers].keys.join(",")})', :order => 'category, name')
+      @headers = @headers.paginate(:page => params['page'], :per_page => perpage)
     end
   end
 

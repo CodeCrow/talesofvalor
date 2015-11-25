@@ -23,8 +23,7 @@ Description: <%= text_field_tag 'filtervalue', '', :size => 10 %>
 <% end %>
 </div>
 <div id="actionbox">
-<%= link_to 'Previous page', { :page => @header_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @header_pages.current.previous %><br>
-<%= link_to 'Next page', { :page => @header_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @header_pages.current.next %> <br>
+<%= will_paginate @headers %> <br>
 <%= session[:admin] ? link_to('New header', :action => 'new') : "" %>
 </div>
 <div id="gameinfo">
@@ -52,6 +51,7 @@ Description: <%= text_field_tag 'filtervalue', '', :size => 10 %>
 </div>
 <% end %>
 
+<%= will_paginate @headers %> 
 <br />
 
 
