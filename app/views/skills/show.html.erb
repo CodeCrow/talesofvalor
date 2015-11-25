@@ -12,7 +12,8 @@
 <% end %>
 
 <p><b>Description:</b>
-<%= simple_format(@skill.description) %>
+<%= @skill.description %>
+<%= simple_format(@skill.description, {}, wrapper_tag: "div")  %>
 </p>
 <% if session[:staff] %>
 <b>Header</b>
@@ -24,7 +25,8 @@ Under <%= link_to sk.header.name, :controller => 'headers', :action => 'show', :
 <% else %>
 Open Skill
 <% end %>
-   for <%= sk.cost %> CPs
+
+for <%= sk.cost %> CPs
 <% if session[:admin] %>
 <i>(<%= link_to 'Delete', :controller => 'skills', :action => 'deleteheader', :id => @skill, :header_id => sk.header_id %>)</i>
 <% end %>

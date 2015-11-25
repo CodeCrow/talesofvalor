@@ -81,11 +81,10 @@ class ApplicationController < ActionController::Base
        else
            total = model.count_by_sql_wrapping_select_query(sql)
        end
-
-       object_pages = Paginator.new self, total, per_page,
-            params['page']
+       object_pages = model.paginate(:total_entries => total, :page => params['page'], :per_page => per_page)
+       # object_pages = Paginator.new self, total, per_page, params['page']
        objects = model.find_by_sql_with_limit(sql,
-            object_pages.current.to_sql[1], per_page)
+            object_pages.to_sql[1], per_page)
        return [object_pages, objects]
    end
 end

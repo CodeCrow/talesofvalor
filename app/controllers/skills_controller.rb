@@ -4,24 +4,18 @@ class SkillsController < ApplicationController
     render :action => 'list'
   end
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  verify :session => :admin, :except => [:index, :list, :tree, :show, :print], :redirect_to => {:action => :list}, :add_flash => {:notice => "Only Site Administrators may edit skills"}
-
   def list
     params[:filter] = 'standard' unless session[:staff]
     @filter = params[:filter] ? params[:filter] : 'standard'    
     if params[:filter] == 'standard'
       sql = 'select s.* from skills s, skill_headers sh LEFT JOIN headers h on sh.header_id = h.id where s.id = sh.skill_id and (sh.header_id=0 or (sh.header_id is not null and h.hidden = 0)) order by s.name'
-      @skill_pages, @skills = paginate_by_sql Skill, sql, 30
+      @skills = Skill.paginate_by_sql(sql, :per_page => 30, :page => params['page'])
     elsif params[:filter] == 'hidden'
       sql = 'select s.* from skills s, skill_headers sh, headers h where s.id = sh.skill_id and sh.header_id=h.id and h.hidden = 1 order by s.name'
-      @skill_pages, @skills = paginate_by_sql Skill, sql, 30
+      @skills = Skill.paginate_by_sql(sql, :per_page => 30, :page => params['page'])
     elsif params[:filter] == 'unlinked'
       sql = 'select s.* from skills s LEFT JOIN skill_headers sh on s.id=sh.skill_id where sh.skill_id is null order by s.name'
-      @skill_pages, @skills = paginate_by_sql Skill, sql, 30
+      @skills = Skill.paginate_by_sql(sql, :per_page => 30, :page => params['page'])
     elsif params[:filter] == 'name'
       @skill_pages, @skills = paginate :skill, :per_page => 30, :order => "name", :conditions => ["name like ?","%"+params[:filtervalue]+"%"]
     elsif params[:filter] == 'bgs'

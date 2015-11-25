@@ -3,8 +3,7 @@
 
 <div id="actionbox">
 Action: <%= session[:admin] ? link_to('New skill', :action => 'new')+"<br>" : ""%>
-<%= link_to 'Previous page', { :page => @skill_pages.current.previous, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @skill_pages.current.previous %>
-<%= link_to 'Next page', { :page => @skill_pages.current.next, :filter => params[:filter], :filtervalue => params[:filtervalue] } if @skill_pages.current.next %> 
+<%= will_paginate @skills %>
 </div>
 
 <% if session[:staff] %>
@@ -45,8 +44,7 @@ Description: <%= text_field_tag 'filtervalue', '', :size => 10 %>
 </table>
 </div>
 <div id="bottompagemover">
-<%= link_to 'Previous page', { :page => @skill_pages.current.previous, :filter => params[:filter] } if @skill_pages.current.previous %>
-<%= link_to 'Next page', { :page => @skill_pages.current.next, :filter => params[:filter] } if @skill_pages.current.next %> 
+    <%= will_paginate @skills %> 
 </div>
 <br />
 
