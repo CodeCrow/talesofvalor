@@ -33,13 +33,16 @@ class ApplicationController < ActionController::Base
   end
 
   def self.owns(session,obj)
-    if obj.type <= Char
+    if obj.class <= Char
       return obj.player == session[:user]
-    elsif obj.type <= Player
-      return obj == session[:user]
-    elsif obj.type <= Bgs
+    elsif obj.class <= Player
+      logger.info("doing things here")    
+      logger.info(session[:user])
+      logger.info(obj)
+      return obj.attributes == session[:user]
+    elsif obj.class <= Bgs
       return obj.char.player == session[:user]
-    elsif obj.type <= Pel
+    elsif obj.class <= Pel
       return obj.player == session[:user]
     end
   end      

@@ -20,9 +20,9 @@
     	<div class="login">
     	  <% if session[:user] %>
     	  <ul>
-     	   <li>Player <%= link_to session[:user].name, :controller => :players, :action => :show, :id => session[:user] %></li>
-     	   <% if session[:user].active_char %>
-     	   <li>Char <%= link_to session[:user].active_char.name, :controller => :chars, :action => :show, :id => session[:user].active_char.id %></li>
+     	   <li>Player <%= link_to session[:user]["name"], :controller => :players, :action => :show, :id => session[:user] %></li>
+     	   <% if session[:user][:active_char] %>
+     	   <li>Char <%= link_to session[:user][:active_char][:name], :controller => :chars, :action => :show, :id => session[:user][:active_char][:id] %></li>
     	    <% end %>
      	   <% if session[:admin] %>
      	   <li><%= link_to "Admin Console", :controller => :players, :action => :adminconsole %></li>

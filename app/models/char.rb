@@ -1,14 +1,14 @@
 class Char < ActiveRecord::Base
   has_many :char_skills
   has_many :skills, :through => :char_skills
-  has_many :between_game_skills, :through => :char_skills, :source => :skill, :conditions => "bgs = 1"
+  has_many :between_game_skills, -> { where(bgs: 1) }, :through => :char_skills, :source => :skill
   has_many :char_headers
   has_many :headers, :through => :char_headers
   has_many :char_origins
   has_many :origins, :through => :char_origins
-  has_many :races, :through => :char_origins, :source => :origin, :conditions => "type = 'race'"
-  has_many :backgrounds, :through => :char_origins, :source => :origin, :conditions => "type = 'background'"
-  has_many :char_logs, :order => "ts desc"
+  has_many :races, -> { where(type: 'race') }, :through => :char_origins, :source => :origin
+  has_many :backgrounds, -> { where(type: 'background') }, :through => :char_origins, :source => :origin 
+  has_many :char_logs, -> { order(ts: :desc) } 
   belongs_to :player
 
   def self.simplecreate(params,player,staff)
@@ -301,90 +301,7 @@ class Char < ActiveRecord::Base
     return hcosts
   end
 
-  def write_to_pdf(_p,detail,event)
-    cheaders = self.headers
-    cskills = self.skillhash
-    sbyh = SkillHeader.skillsbyheader
-    origins = self.origins
-    cskillsleft = cskills.keys
-
-    _p.text self.name, :font_size => 24, :justification => :center
-    _p.text "\nCP Available: #{self.cp_avail} CP Spent: #{self.cp_spent} CP Total: #{self.cp_avail+self.cp_spent}\n\n", :font_size => 12, :justification => :left
-    for o in self.origins
-      _p.text o.type.to_s.capitalize + ': '+o.name, :font_size => 12, :justification => :left
-    end
-    _p.text "\n\n"
-
-    _p.text "Skills", :font_size => 18
-    _p.text "Open Skills", :font_size => 16, :left => 10
-    for skh in sbyh[0]
-      if cskills[skh.skill_id]
-        cskillsleft.delete(skh.skill_id)
-        if (skh.skill.flag?)
-          _p.text skh.skill.name, :font_size => 12, :left => 20
-        else
-          _p.text cskills[skh.skill_id].count.to_s+' '+skh.skill.name, :font_size => 12, :left => 20
-        end
-      end
-    end
-    
-    for h in cheaders
-      _p.text h.name, :font_size => 16, :left => 10
-      if sbyh[h.id]
-        for skh in sbyh[h.id]
-          if cskills[skh.skill_id] && cskillsleft.delete(skh.skill_id)
-            if (skh.skill.flag?)
-              _p.text skh.skill.name, :font_size => 12, :left => 20
-            else
-              _p.text cskills[skh.skill_id].count.to_s+' '+skh.skill.name, :font_size => 12, :left => 20
-            end
-          end
-        end
-      end
-    end
-
-    if !cskillsleft.empty?
-      _p.text "Other Skills", :font_size => 16, :left => 10
-      for sk in cskillsleft.collect {|s| Skill.find(s) }
-        if sk.flag?
-          _p.text sk.name, :font_size => 12, :left => 20
-        else
-          _p.text cskills[sk.id].count.to_s+' '+sk.name, :font_size => 12, :left => 20
-        end
-      end
-    end
-
-    _p.text "\n\nPlayer Notes:", :font_size => 14
-    _p.text self.player_notes.gsub(/\342|\200|\234|\235|\231|\303\|\240|\246|\206|\222/,''), :font_size => 10, :left => 10
-
-    _p.text "\n\nVisible Staff Notes:", :font_size => 14
-    _p.text self.visible_staff_notes.gsub(/\342|\200|\234|\235|\231|\303\|\240|\246|\206|\222/,''), :font_size => 10, :left => 10
-
-    if event != 0
-      _p.text "\n\n"
-      _p.text "Between Game Skills", :font_size => 18
-      for bgs in Bgs.find(:all, :conditions => ["event_id = ? and char_id = ?",event,self.id])
-        _p.text "\n"
-        bgs.write_to_pdf(_p)
-      end
-
-      _p.text "\n\n"
-      _p.text "Messages", :font_size => 18
-      for em in EventMessage.find(:all, :conditions => ["event_id = ? and char_id = ?", event, self.id])
-        _p.text "\n"
-        em.write_to_pdf(_p)
-      end
-    end
-
-    if detail
-      _p.start_new_page
-      _p.text "<b>Skill Descriptions</b>", :font_size => 14
-      for sk in cskills.values
-        sk.skill.write_to_pdf(_p,sk.count)
-      end
-    end
-
-  end
+ 
 
 
   def self.resetpointcap(obj)

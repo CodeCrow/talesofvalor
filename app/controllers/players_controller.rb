@@ -8,15 +8,14 @@ class PlayersController < ApplicationController
 
   def welcome
     @event = Event.next()
-
     if session[:user]
       if @event
-        @reg = Registration.find(:first,:conditions => {:event_id => @event.id, :player_id => session[:user].id})
+        @reg = Registration.where(event_id: @event.id, player_id: session[:user][:id]).first()
       end
       @last = Event.last()
-      @attend = Attendance.find(:first,:conditions => {:event_id => @last.id, :player_id => session[:user].id},:include => [:char])
+      @attend = Attendance.where(event_id: @last.id, player_id: session[:user][:id]).includes(:char).first()
       if @attend
-        @pel = Pel.find(:first,:conditions => {:event_id => @last.id, :player_id => session[:user].id})
+        @pel = Pel.where(event_id: @last.id, player_id: session[:user][:id]).first()
       end
     end
   end
@@ -28,21 +27,23 @@ class PlayersController < ApplicationController
   end
 
   def dologin
-    nu = Nukeuser.find(:first, :conditions => ['username = ? and user_password=md5(?)',params[:login][:username],params[:login][:password]])
+    nu = Nukeuser.where(['username = ? and user_password=md5(?)',params[:username],params[:password]]).first()
 
     if nu
       flash[:notice] = ''
-      @player = Player.find(:first, :conditions => {:username => nu.username})
+      @player = Player.where(username: nu.username).first()
+
+      logger.info("player")
+      logger.info(player)
       if not @player
         @player = Player.grab(nu)
         flash[:notice] = "Created local Player for '#{@player.name}' with information from main ToV site<br>"
       end
       session[:user] = @player
-      session[:staff] = true if @player.staff?
-      session[:admin] = true if @player.admin?
+      session[:staff] = true if player.staff?
+      session[:admin] = true if player.admin?
       session[:avail] = @player.viewable(nil)
-      flash[:notice] += "#{@player.name} logged in"
-      redirect_to :action => :show, :id => @player
+      redirect_to :action => :show, :id => @player[:id]
     else
       flash[:notice] = "Username or password incorrect"
       redirect_to :action => :login
@@ -75,7 +76,7 @@ class PlayersController < ApplicationController
     nu = Nukeuser.find(:first, :conditions => ["username = ?",params[:username]])
     if nu
       p = Player.grab(nu)
-      redirect_to :action => :show, :id => p
+      redirect_to :action => :show, :id => p.id
     else
       redirect_to :action => :harvest
     end
@@ -126,19 +127,21 @@ class PlayersController < ApplicationController
   end
 
   def show
+
+    logger.info("I'm showing the player")
     if !session[:players]
       session[:players] = Array.new
     end
     @player = Player.find(params[:id])
-    @futureevents = Event.find(:all, :conditions => "date > now()", :order => "date")
-    @pastevents = Event.find(:all, :conditions => "date < now()", :order => "date desc")
+    @futureevents = Event.where("date > now()").order("date")
+    @pastevents = Event.where("date < now()").order("date desc")
     @regs = {}
-    Registration.find(:all, :conditions => ["player_id = ?",@player.id]).each {|r| @regs[r.event_id] = r }
+    Registration.where("player_id = ?",@player.id).each {|r| @regs[r.event_id] = r }
     @atts = {}
-    Attendance.find(:all, :conditions => ["attendances.player_id = ?",@player.id], :include => :char).each {|a| @atts[a.event_id] = a }
+    Attendance.where("attendances.player_id = ?",@player.id).includes(:char).each {|a| @atts[a.event_id] = a }
     @pels = {}
-    Pel.find(:all, :conditions => ["pels.player_id = ?",@player.id], :include => [:event]).each {|a| @pels[a.event_id] = a }
-    @logs = PlayerLog.find(:all, :conditions => ["player_id=?",@player.id], :limit => 3, :order => "ts desc")
+    Pel.where("pels.player_id = ?",@player.id).includes(:event).each {|a| @pels[a.event_id] = a }
+    @logs = PlayerLog.where("player_id=?",@player.id).order("ts desc").limit(3)
   end
 
   def getlog
@@ -347,7 +350,7 @@ class PlayersController < ApplicationController
     else
       flash[:notice] = "No CPs Transferred; either you're out of CPs or you hit the point cap."
     end
-    redirect_to :action => 'show', :id => @player
+    redirect_to :action => 'show', :id => @player.id
   end
 
   def destroy
@@ -431,12 +434,13 @@ class PlayersController < ApplicationController
 
   def missingperm_redirect
     flash[:notice] = "Permissions not set up for that action"
-    redirect_to :controller => "players", :action => "show", :id => session[:user]
+    redirect_to :controller => "players", :action => "show", :id => session[:user]["id"]
   end
 
   def eperm_redirect
+    logger.info(session[:user])
     flash[:notice] = "You don't have permission to perform that operation"
-    redirect_to :controller => "players", :action => "show", :id => session[:user]
+    redirect_to :controller => "players", :action => "show", :id => session[:user]["id"]
   end
 
   @@perms = {"welcome" => "everyone", "new" => "everyone", "create" => "everyone",
@@ -455,9 +459,13 @@ class PlayersController < ApplicationController
     "togglewide" => "everyone"}
 
   around_filter do |controller, action| 
+
     method = @@perms[controller.action_name]
+    logger.info(method)
     if controller.params[:id]
       obj = Player.find(controller.params[:id])
+      logger.info("around filter player find")
+      logger.info(obj)
     else
       obj = nil
     end

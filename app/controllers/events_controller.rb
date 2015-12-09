@@ -1,16 +1,8 @@
-require 'pdf/writer'
-
 class EventsController < ApplicationController
   def index
     list
     render :action => 'list'
   end
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
-
-  verify :session => :user, :except => [:index, :list, :show, :notes], :redirect_to => { :action => :list }, :add_flash => {:notice => "Must log in before interacting with events"}
 
   def list
     @future = Event.find(:all,:conditions => "date > now()",:order => "date asc")
@@ -20,7 +12,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     if @event.date > Time.now()
-      @ppls  = Registration.find(:all, :conditions => ["event_id = ?",params[:id]],
+      @ppls  = Registration.where(:all, :conditions => ["event_id = ?",params[:id]],
                                  :include => [{:player => :active_char}]).collect {|a| {:player => a.player, :char => a.player.active_char, :mealplan => a.mealplan, :cabin => a.cabin, :notes => a.notes, :regid => a.id}}
       @regs = {}
       @unreg = Array.new
@@ -38,15 +30,7 @@ class EventsController < ApplicationController
     @ppls = @playerppls+[nil]+@staffppls
 
     if session[:staff]
-      if params[:print]
-        _p = PDF::Writer.new
-        #:orientation => :landscape
-        _p.select_font 'Times-Roman'
-        @event.write_to_pdf(_p,@playerppls,@staffppls)
-        send_data _p.render, :filename => "Registration #{@event.name}.pdf", :type => "application/pdf"
-      else
-        render :action => :staffshow
-      end
+      render :action => :staffshow
     end
   end
   

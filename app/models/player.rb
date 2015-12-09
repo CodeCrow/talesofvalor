@@ -1,10 +1,10 @@
 class Player < ActiveRecord::Base
 
-  has_many :chars, :order => 'name'
+  has_many :chars, ->{ order(:name) }
   belongs_to :active_char, :class_name => "Char", :foreign_key => "active_char_id"
-  has_many :events, :through => :registrations, :order => 'date'
+  has_many :events, ->{ order(:date) }, :through => :registrations
   has_many :registrations
-  has_many :player_logs, :order => "ts desc"
+  has_many :player_logs, -> { order(ts: :desc) } 
 
   def self.grab(nukeuser)
     if nukeuser.name.length > 0
