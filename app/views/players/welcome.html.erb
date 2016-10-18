@@ -5,7 +5,7 @@
 
 <p>See links on the sidebar for information about skills.
 <% else %>
-<p>Welcome, <%= session[:user][:name] %>!
+<p>Welcome, <%= session[:user]["name"] %>!
 <% end %>
 
 <% if @event %>

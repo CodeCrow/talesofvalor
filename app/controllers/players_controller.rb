@@ -34,14 +34,14 @@ class PlayersController < ApplicationController
       @player = Player.where(username: nu.username).first()
 
       logger.info("player")
-      logger.info(player)
+      logger.info(@player)
       if not @player
         @player = Player.grab(nu)
         flash[:notice] = "Created local Player for '#{@player.name}' with information from main ToV site<br>"
       end
       session[:user] = @player
-      session[:staff] = true if player.staff?
-      session[:admin] = true if player.admin?
+      session[:staff] = true if @player.staff?
+      session[:admin] = true if @player.admin?
       session[:avail] = @player.viewable(nil)
       redirect_to :action => :show, :id => @player[:id]
     else
